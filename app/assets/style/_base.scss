@@ -1,0 +1,38 @@
+body{
+    position: relative;
+}
+
+img{
+    display: block;
+}
+
+button, button:focus{
+    outline: none !important;
+    border: none !important;
+}
+
+.navbar-light .navbar-toggler{
+    color: #fff;
+}
+.mt130{
+    margin-top: 130px !important;
+}
+.fsz-lg-40{
+    @include lg{
+        font-size: 40px;
+    }
+}
+.fsz-lg-20{
+    @include lg{
+        font-size: 20px;
+    }
+}
+.radious8{
+    border-radius: 8px;
+}
+.radious20{
+    border-radius: 20px;
+}
+.radious100{
+    border-radius: 100px;
+}

@@ -1,0 +1,38 @@
+$xxl:1400px;
+$xl:1200px;
+$lg:992px;
+$md:768px;
+$sm:576px;
+
+@mixin xxl {
+    @media(min-width:$xxl){
+        @content;
+    }
+}
+@mixin xl {
+    @media(min-width:$xl){
+        @content;
+    }
+}
+@mixin lg {
+    @media(min-width:$lg){
+        @content;
+    }
+}
+@mixin md {
+    @media(min-width:$md){
+        @content;
+    }
+}
+@mixin sm {
+    @media (min-width:$sm) {
+        @content;
+    }
+}
+
+@mixin text-liner($color) {
+    background: $color;
+    background-clip: text;
+    color: transparent !important;
+}
+// linear-gradient(135deg, rgba(188, 43, 80, 1) 30%, rgba(130, 84, 235, 1));

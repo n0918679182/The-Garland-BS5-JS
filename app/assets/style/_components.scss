@@ -1,0 +1,34 @@
+.btn-big{
+    border-radius: 8px;
+    background: #E95F5C;
+    &:hover{
+        background: #E33430;
+    }
+    color: #fff;
+    width: 100%;
+    transition: .3s;
+    @include lg{
+        width: auto;
+    }
+    a{
+        color: #fff !important;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        padding: 0;
+        width: 100%;
+        @include lg{
+            width: 108px;
+        }
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.title-underline{
+    width: 60px;
+    height: 6px;
+    border-radius: 10px;
+    background: #E95F5C;
+}

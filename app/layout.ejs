@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%- title %></title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- material icons -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
+    
+    <!-- swipper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+    <!-- my css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/style/all.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container my-8">
+        <a href="index.html"><img src="assets/images/Logo-big.png" alt="The Garland" style="width:140px;"></a>
+        <h1 class="navbar-brand d-none" href="index.html">The Garland</h1>
+
+        <button class="navbar-toggler" id="nav-menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" id="nav-burger"></span>
+          <div class="btn-close d-none" id="nav-burger-close" aria-label="Close"></div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center px-3 px-lg-0 pt-6 pt-lg-0">
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="#">花藝小教室</a>
+            </li>
+
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="#">花藝課程</a>
+            </li>
+
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="#">客製花藝</a>
+            </li>
+
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="#">花藝諮詢</a>
+            </li>
+
+            <li class="nav-item btn-big mt-4 mt-lg-0">
+              <a class="nav-link" href="#">登入 </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="cover" id="nav-cover"></div>
+
+    <%- contents %>
+
+    <footer class="footer">
+      <div class="container mb-4">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="w-100 border border-primary p-3">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.9727503062254!2d121.52096985765994!3d25.102783748658375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442afdcf021b4d9%3A0x5c8bd2ba3831ee79!2z6aaZ5qqz546r55Gw6Iqx6IuR!5e0!3m2!1szh-TW!2stw!4v1666165845909!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              class="w-100" style="height:240px;"></iframe>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex flex-column ps-3 ps-sm-6 ps-md-11 pt-4 p-lg-3">
+              <h2 class="h3 fw-bold text-dark">聯絡我們</h2>
+              <span class="text-light foot-title-underline mb-6">Contact Us</span>
+              <ul class="w-100 list-unstyled liner-bg">
+                <li class="d-flex">
+                  <span class="material-icons h4 me-4"> call </span>
+                  <p>02-1234-5678</p>
+                </li>
+                <li class="d-flex">
+                  <span class="material-icons h4 me-4"> location_on </span>
+                  <p>台北市士林區中山北路六段35巷32號</p>
+                </li>
+                <li class="d-flex">
+                  <span class="material-icons h4 me-4"> storefront </span>
+                  <p>週一至週六 11:30 - 18:30</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex justify-content-between border-bottom pb-4 pt-5">
+              <img src="assets/images/Logo-big.png" style="width:140px;" alt="">
+              <div class="d-flex align-items-center">
+                <a class="me-3 scale01" href="#"><img src="assets/images/line.png" style="width: 24px;" alt="line"></a>
+                <a class="me-3 scale01" href="#"><img src="assets/images/instegram.png" style="width: 24px;" alt="line"></a>
+                <a class="scale01" href="#"><img src="assets/images/facebook.png" style="width: 24px;" alt="line"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-primary80 text-center py-4">
+        <p class="text-white m-0">Copyright © 2022 The Garland</p>
+      </div>
+    </footer>
+
+    
+
+    <!-- swipper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!-- my js -->
+    <script src="./assets/js/vendors.js"></script>
+    <script src="./assets/js/all.js"></script>
+
+  </body>
+  
+
+</html>

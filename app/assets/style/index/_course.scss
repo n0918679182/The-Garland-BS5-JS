@@ -1,0 +1,30 @@
+.course-card{
+    height: 240px !important;
+    background-size: cover;
+    background-position: center;
+    &-main{
+        @include lg{
+            height: 600px !important;
+        }
+    }
+    &-second{
+        @include lg{
+            height: 276px !important;
+        }
+    }
+    .course-cover{
+       background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) , rgba(161, 158, 197, 0) 70%);
+    }
+    h3,p{
+        color: #ececec;
+        transition: .3s;
+    }
+    &:hover{
+        h3{
+            color: #fff;
+        }
+        .course-cover{
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) , rgba(161, 158, 197, 0) 90%);
+         }
+    }
+}

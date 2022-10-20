@@ -1,0 +1,24 @@
+footer{
+    .foot-title-underline{
+        position: relative;
+        padding-left: 2px;
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 2px;
+            width: 60px;
+            height: 4px;
+            background: #E95F5C;
+            border-radius: 10px;
+        }
+    }
+    .liner-bg{
+        background:radial-gradient(ellipse farthest-side at center,#FDEDED 20%,#fff);
+    }
+    .scale01{
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+}

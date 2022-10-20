@@ -1,0 +1,66 @@
+.works-swiper-pic{
+    width: 315px;
+    height: 315px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.workSwiperArea{
+    .swiper-button-next, .swiper-button-prev{
+        color: #4b4b4b;
+        background: rgb(255, 255, 255);
+        border: 1px solid #ECECEC;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        &::after{
+            font-size: 20px;
+            position: absolute;
+            
+        }
+    }
+    .swiper-button-prev{
+        left: -20px !important;
+        @include xl{
+            left: -5px !important;
+        }
+        @include xxl{
+            left: -25px !important;
+        }
+        &::after{
+            top: 12px;
+            left: 15px;
+        }
+    }
+    .swiper-button-next{
+        right: -20px !important;
+        @include xl{
+            right: -5px !important;
+        }
+        @include xxl{
+            right: -25px !important;
+        }
+        &::after{
+            top: 12px;
+            right: 15px;
+        }
+    }
+    .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+        bottom: -48px;
+        @include lg{
+            bottom: -64px;
+        }
+        @include xl{
+            bottom: -80px;
+        }
+    }
+    .swiper-pagination-bullet{
+        transition: .3s;
+    }
+    .swiper-pagination-bullet-active{
+        background: #E95F5C;
+        width: 30px;
+        border-radius: 20px;
+    }
+}
