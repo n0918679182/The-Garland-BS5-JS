@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boostrap Index</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- material icons -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
+    
+    <!-- swipper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+    <!-- my css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/style/all.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container my-8">
+        <a href="index.html"><img src="assets/images/Logo-big.png" alt="The Garland" style="width:140px;"></a>
+        <h1 class="navbar-brand d-none" href="index.html">The Garland</h1>
+
+        <button class="navbar-toggler" id="nav-menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" id="nav-burger"></span>
+          <div class="btn-close d-none" id="nav-burger-close" aria-label="Close"></div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center px-3 px-lg-0 pt-6 pt-lg-0">
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="blog-list.html">花藝小教室</a>
+            </li>
+
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="course-list.html">花藝課程</a>
+            </li>
+
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="#">客製花藝</a>
+            </li>
+
+            <li class="nav-item w-100 text-center py-4 py-lg-0 me-lg-7 menu-li">
+              <a class="nav-link text-dark" href="#">花藝諮詢</a>
+            </li>
+
+            <li class="nav-item btn-big mt-4 mt-lg-0 w-100">
+              <a class="nav-link w-100" href="#">登入 </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="cover" id="nav-cover"></div>
+
+    
+<div class="container mt130 mb-tofooter ps-lg-10">
+
+    <div class="d-flex flex-column align-items-center align-items-lg-start mb-11 mb-lg-18">
+        <h2 class="h5 fsz-lg-28 text-dark fw-bolder lh-1">花藝課程</h2>
+        <div class="content-title-underline mb-1"></div>
+        <span class="h7 fsz-lg-16 text-primary60">Garland Course</span>
+    </div>
+    <div class="course-list">
+        <!-- <div class="row justify-content-center ">
+            <div class="col-11 col-lg-5 mb-8 mb-lg-0">
+                <div class="courseList-img imgOutline-odd w-100 radious8 shadow" style="background-image: url('assets/images/course01.jpg');"></div>
+            </div>
+            <div class="col-11 col-lg-5 mb-10">
+                <div class="px-1 d-flex flex-column align-items-end text-end">
+                    <h3 class="text-dark fw-bold mb-4 mb-xl-10 ls-2helf">從零開始，花藝世界</h3>
+                    <p class="text-dark h5 mb-3 mb-xl-6">開課日期：2022 / 10 / 18</p>
+                    <p class="text-dark lh-2 mb-5 mb-xl-7">你也喜歡花，但卻不知如何入門嗎？<br />
+                       The Garland 帶你輕鬆踏入花藝的世界，體驗不一樣的生活樂趣！</p>
+                    <div class="btn-big">
+                        <a class="w-100"  href="#">MORE </a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+
+
+</div>
+
+<script>
+    let courseData = [
+        {
+            id:0,
+            courseName:'從零開始，花藝世界',
+            courseBeginDate:'2022 / 10 / 18',
+            courseTime:'19:00~21:00',
+            coursePlace:'B02',
+            courseTeacher:'Andy Wu',
+            courseMaximumStud:15,
+            courseState:'已開課',
+            courseImage:'course01.jpg',
+            courseSimpleIntro:`你也喜歡花，但卻不知如何入門嗎？<br />
+                         The Garland 帶你輕鬆踏入花藝的世界，體驗不一樣的生活樂趣！`,
+            courseContent:`課程大綱<br />
+                            <br />
+                            第 1 堂 - 基本技法<br />
+                            <br />
+                                    工欲善其事，必先利其器。在開始製作花藝作品前，先了解有哪些會應用到的工具，以及常見的花藝技法，事前準備好，才不會打亂製作時的興致。<br />
+                            <br />
+                            <br />
+                            第 2 堂 - 花藝成品教學： 花漾小盆花<br />
+                            <br />
+                                    花藝最入門的作品之一，精緻可愛的花漾小盆花，可以擺放在書桌或客廳桌上，輕巧點綴單調的桌面喔！<br />
+                            <br />
+                            <br />
+                            第 3 堂 - 花藝成品教學： 花漾珠寶盒<br />
+                            <br />
+                                    花漾珠寶盒同時兼具美觀與實用性，放在化妝台上，可以展現出高貴的氣質，另有小抽屜，放置各式裝飾品。<br />
+                            <br />
+                            <br />
+                            第 4 堂 - 花藝成品教學：花相框<br />
+                            <br />
+                                    讓富有紀念意義的相框，保存著花朵最動人的時刻，隨時都能觀賞到美麗的畫面。<br />
+                            <br />
+                            <br />
+                            <br />
+                            一期四堂課，每堂2小時<br />
+                            每週皆有開課<br />
+                            停課會另行告知，需三天前預約報名上課<br />
+                            <br />
+                            <br />
+                            – 含花材、提袋一個<br />
+                            – 作品高約 20 公分寬約 25 公分，共 1 盆<br />
+                            – 課程時間約 2 小時<br />
+                            <br />
+                            <br />
+                            <br />
+                            【注意事項】<br />
+                            <br />
+                            ▸工作室空間有限，且課程內容有智慧財產權，為保障講師與學員權益，無法攜伴與旁聽，請見諒。<br />
+                            <br />
+                            ▸課程費用含花材/師資/提袋<br />
+                            <br />
+                            ▸若有花材/花器缺貨或品質不佳，會依狀況適時調整更換花材/花器。<br />
+                            <br />
+                            ▸若臨時有事，課程可轉讓他人，或到工作室領取成品(請於一周前通知，因花材已預留故無法退費)`,
+            courseGuildline:`10 / 18 - 基本技法<br />
+                             <br />
+                             10 / 25 - 花藝成品教學： 花漾小盆花<br />
+                             <br />
+                             11 / 1 - 花藝成品教學： 花漾珠寶盒<br />
+                             <br />
+                             11 / 8 - 花藝成品教學：花相框`,
+            courseStud:[]
+        },{
+            id:1,
+            courseName:'永恆寧靜，永生花束',
+            courseBeginDate:'2022 / 11 / 18',
+            courseTime:'19:00~21:00',
+            coursePlace:'B01',
+            courseTeacher:'Windy Liu',
+            courseMaximumStud:15,
+            courseState:'未開課',
+            courseImage:'course02.jpg',
+            courseSimpleIntro:`讓最美好的事物，靜止在瞬間<br />
+                               定格了的，不只是花，還有只屬於你我的這份安靜`,
+            courseContent:`課程大綱<br />
+                            <br />
+                            第 1 堂 - 永生花入門<br />
+                            <br />
+                                    工欲善其事，必先利其器。在開始製作花藝作品前，先了解有哪些會應用到的工具，以及常見的花藝技法，事前準備好，才不會打亂製作時的興致。<br />
+                            <br />
+                            <br />
+                            第 2 堂 - 花藝成品教學： 永生乾燥盆花<br />
+                            <br />
+                                    花藝最入門的作品之一，精緻可愛的花漾小盆花，可以擺放在書桌或客廳桌上，輕巧點綴單調的桌面喔！<br />
+                            <br />
+                            <br />
+                            第 3 堂 - 花藝成品教學： 玫瑰永生花束<br />
+                            <br />
+                                    花漾珠寶盒同時兼具美觀與實用性，放在化妝台上，可以展現出高貴的氣質，另有小抽屜，放置各式裝飾品。<br />
+                            <br />
+                            <br />
+                            第 4 堂 - 花藝成品教學：永生禮盒花<br />
+                            <br />
+                                    讓富有紀念意義的相框，保存著花朵最動人的時刻，隨時都能觀賞到美麗的畫面。<br />
+                            <br />
+                            <br />
+                            <br />
+                            一期四堂課，每堂2小時<br />
+                            每週皆有開課<br />
+                            停課會另行告知，需三天前預約報名上課<br />
+                            <br />
+                            <br />
+                            – 含花材、提袋一個<br />
+                            – 作品高約 20 公分寬約 25 公分，共 1 盆<br />
+                            – 課程時間約 2 小時<br />
+                            <br />
+                            <br />
+                            <br />
+                            【注意事項】<br />
+                            <br />
+                            ▸工作室空間有限，且課程內容有智慧財產權，為保障講師與學員權益，無法攜伴與旁聽，請見諒。<br />
+                            <br />
+                            ▸課程費用含花材/師資/提袋<br />
+                            <br />
+                            ▸若有花材/花器缺貨或品質不佳，會依狀況適時調整更換花材/花器。<br />
+                            <br />
+                            ▸若臨時有事，課程可轉讓他人，或到工作室領取成品(請於一周前通知，因花材已預留故無法退費)`,
+            courseGuildline:`11 / 18 - 永生花入門<br />
+                             <br />
+                             11 / 25 - 花藝成品教學： 永生乾燥盆花<br />
+                             <br />
+                             12 / 1 - 花藝成品教學： 玫瑰永生花束<br />
+                             <br />
+                             12 / 8 - 花藝成品教學：永生禮盒花`,
+            courseStud:[]
+        },
+    ]
+    let screenWidth = window.screen.availWidth;// 獲取螢幕寬度
+    const courseList = document.querySelector('.course-list');
+    let over992 = screenWidth>=992;
+    let courseListTemp = '';
+    courseData.forEach(o=>{
+        courseListTemp+=`<div class="row ${o.id%2==0?"flex-row":"flex-row-reverse"} justify-content-center ">
+                            <div class="col-11 col-lg-5 mb-8 mb-lg-10 mb-xl-20">
+                                <div class="courseList-img ${o.id%2==0?"imgOutline-odd":"imgOutline-even"}  w-100 radious8 shadow" style="background-image: url('assets/images/${o.courseImage}');"></div>
+                            </div>
+                            <div class="col-11 col-lg-5 mb-10">
+                                <div class="px-1 d-flex flex-column ${over992?(o.id%2!=0?'align-items-end text-end':''):''}">
+                                    <h3 class="text-dark fw-bold mb-4 mb-xl-10 ls-2helf">${o.courseName}</h3>
+                                    <p class="text-dark h5 mb-3 mb-xl-6">開課日期：${o.courseBeginDate}</p>
+                                    <p class="text-dark lh-2 mb-5 mb-xl-7">${o.courseSimpleIntro}</p>
+                                    <div class="btn-big ">
+                                        <a class="w-100"  href="http://localhost:8080/course-detail.html?courseNum=${o.id}">MORE </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+    })
+    console.log(courseList)
+    courseList.innerHTML=courseListTemp;
+</script>
+
+    <footer class="footer">
+      <div class="container mb-4">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="w-100 border border-primary p-3">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.9727503062254!2d121.52096985765994!3d25.102783748658375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442afdcf021b4d9%3A0x5c8bd2ba3831ee79!2z6aaZ5qqz546r55Gw6Iqx6IuR!5e0!3m2!1szh-TW!2stw!4v1666165845909!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              class="w-100" style="height:240px;"></iframe>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex flex-column ps-3 ps-sm-6 ps-md-11 pt-4 p-lg-3">
+              <h2 class="h3 fw-bold text-dark">聯絡我們</h2>
+              <span class="text-light foot-title-underline mb-6">Contact Us</span>
+              <ul class="w-100 list-unstyled liner-bg">
+                <li class="d-flex">
+                  <span class="material-icons h4 me-4"> call </span>
+                  <p>02-1234-5678</p>
+                </li>
+                <li class="d-flex">
+                  <span class="material-icons h4 me-4"> location_on </span>
+                  <p>台北市士林區中山北路六段35巷32號</p>
+                </li>
+                <li class="d-flex">
+                  <span class="material-icons h4 me-4"> storefront </span>
+                  <p>週一至週六 11:30 - 18:30</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex justify-content-between border-bottom pb-4 pt-5">
+              <img src="assets/images/Logo-big.png" style="width:140px;" alt="">
+              <div class="d-flex align-items-center">
+                <a class="me-3 scale01" href="#"><img src="assets/images/line.png" style="width: 24px;" alt="line"></a>
+                <a class="me-3 scale01" href="#"><img src="assets/images/instegram.png" style="width: 24px;" alt="line"></a>
+                <a class="scale01" href="#"><img src="assets/images/facebook.png" style="width: 24px;" alt="line"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-primary80 text-center py-4">
+        <p class="text-white m-0">Copyright © 2022 The Garland</p>
+      </div>
+    </footer>
+
+    
+
+    <!-- swipper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!-- my js -->
+    <script src="./assets/js/vendors.js"></script>
+    <script src="./assets/js/all.js"></script>
+
+  </body>
+  
+
+</html>

@@ -51,5 +51,14 @@ navMenu.addEventListener('click', function () {
   navClose.classList.toggle('d-none');
   navCover.classList.toggle('h-100');
   navCover.classList.toggle('op20');
-});
+}); // const courseIntro = document.querySelector('#intro-tab');
+// const courseTable = document.querySelector('#courseTable-tab');
+// courseIntro.addEventListener('click',function(){
+//   courseIntro.classList.add('courseIntroOutline');
+//   courseTable.classList.remove('courseTableOutline');
+// })
+// courseTable.addEventListener('click',function(){
+//   courseIntro.classList.remove('courseIntroOutline');
+//   courseTable.classList.add('courseTableOutline');
+// })
 //# sourceMappingURL=all.js.map
