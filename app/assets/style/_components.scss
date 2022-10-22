@@ -7,8 +7,9 @@
     color: #fff;
     width: 100%;
     transition: .3s;
+    width: 108px;
     @include lg{
-        width: auto;
+        width: 108px !important;
     }
     a{
         color: #fff !important;
@@ -16,9 +17,9 @@
         font-weight: 600;
         line-height: 18px;
         padding: 0;
-        width: 100%;
+        width: 108px;
         @include lg{
-            width: 108px;
+            width: 108px !important;
         }
         height: 50px;
         display: flex;
@@ -31,4 +32,9 @@
     height: 6px;
     border-radius: 10px;
     background: #E95F5C;
+}
+.content-title-underline{
+    width: 100px;
+    height: 2px;
+    background: #F5B8B7;
 }

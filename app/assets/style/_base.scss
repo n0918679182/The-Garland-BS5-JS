@@ -4,6 +4,8 @@ body{
 
 img{
     display: block;
+    height: auto;
+    object-fit: cover;
 }
 
 button, button:focus{
@@ -17,15 +19,34 @@ button, button:focus{
 .mt130{
     margin-top: 130px !important;
 }
+.mb-tofooter{
+    margin-bottom: 64px;
+    @include lg{
+        margin-bottom: 160px;
+    }
+}
 .fsz-lg-40{
     @include lg{
         font-size: 40px;
+    }
+}
+.fsz-lg-28{
+    @include lg{
+        font-size: 28px;
     }
 }
 .fsz-lg-20{
     @include lg{
         font-size: 20px;
     }
+}
+.fsz-lg-16{
+    @include lg{
+        font-size: 16px;
+    }
+}
+.h7{
+    font-size: 12px;
 }
 .radious8{
     border-radius: 8px;
@@ -35,4 +56,10 @@ button, button:focus{
 }
 .radious100{
     border-radius: 100px;
+}
+.lh-150{
+    line-height: 1.5;
+}
+.ls-2helf{
+    letter-spacing: 2.5px;
 }
