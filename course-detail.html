@@ -102,6 +102,7 @@
                 </li>
               </ul>
               <div class="tab-content" id="myTabContent">
+                <!-- 課程介紹 -->
                 <div class="tab-pane fade show active px-3 pt-4 px-lg-7 pt-lg-12" id="intro" role="tabpanel" aria-labelledby="intro-tab">
                     <p>課程大綱<br />
                         <br />
@@ -147,12 +148,26 @@
                         <br />
                         ▸若臨時有事，課程可轉讓他人，或到工作室領取成品(請於一周前通知，因花材已預留故無法退費)</p>
                 </div>
-                <div class="tab-pane fade" id="courseTable" role="tabpanel" aria-labelledby="courseTable-tab">445</div>
+                <!-- 報名表單 -->
+                <div class="tab-pane fade px-3 pt-4 px-lg-7 pt-lg-12" id="courseTable" role="tabpanel" aria-labelledby="courseTable-tab">
+                    <label for="courseName">請選擇課程：</label>
+                    <select class="form-select" aria-label="Default select example" name="courseName" id="courseName">
+                        <option value="0">從零開始，花藝世界</option>
+                        <option value="1">永恆寧靜，永生花束</option>
+                    </select>
+
+                </div>
+
               </div>
         </div>
 
     </div>
+    <div class="jsonDBTest">
+
+    </div>
 </div>
+
+
 
     <footer class="footer">
       <div class="container mb-4">
@@ -201,6 +216,7 @@
     </footer>
 
     
+    
 
     <!-- swipper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -213,3 +229,4 @@
   
 
 </html>
+

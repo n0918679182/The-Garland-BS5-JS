@@ -91,161 +91,12 @@
 
 
 </div>
+<!-- axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
-<script>
-    let courseData = [
-        {
-            id:0,
-            courseName:'從零開始，花藝世界',
-            courseBeginDate:'2022 / 10 / 18',
-            courseTime:'19:00~21:00',
-            coursePlace:'B02',
-            courseTeacher:'Andy Wu',
-            courseMaximumStud:15,
-            courseState:'已開課',
-            courseImage:'course01.jpg',
-            courseSimpleIntro:`你也喜歡花，但卻不知如何入門嗎？<br />
-                         The Garland 帶你輕鬆踏入花藝的世界，體驗不一樣的生活樂趣！`,
-            courseContent:`課程大綱<br />
-                            <br />
-                            第 1 堂 - 基本技法<br />
-                            <br />
-                                    工欲善其事，必先利其器。在開始製作花藝作品前，先了解有哪些會應用到的工具，以及常見的花藝技法，事前準備好，才不會打亂製作時的興致。<br />
-                            <br />
-                            <br />
-                            第 2 堂 - 花藝成品教學： 花漾小盆花<br />
-                            <br />
-                                    花藝最入門的作品之一，精緻可愛的花漾小盆花，可以擺放在書桌或客廳桌上，輕巧點綴單調的桌面喔！<br />
-                            <br />
-                            <br />
-                            第 3 堂 - 花藝成品教學： 花漾珠寶盒<br />
-                            <br />
-                                    花漾珠寶盒同時兼具美觀與實用性，放在化妝台上，可以展現出高貴的氣質，另有小抽屜，放置各式裝飾品。<br />
-                            <br />
-                            <br />
-                            第 4 堂 - 花藝成品教學：花相框<br />
-                            <br />
-                                    讓富有紀念意義的相框，保存著花朵最動人的時刻，隨時都能觀賞到美麗的畫面。<br />
-                            <br />
-                            <br />
-                            <br />
-                            一期四堂課，每堂2小時<br />
-                            每週皆有開課<br />
-                            停課會另行告知，需三天前預約報名上課<br />
-                            <br />
-                            <br />
-                            – 含花材、提袋一個<br />
-                            – 作品高約 20 公分寬約 25 公分，共 1 盆<br />
-                            – 課程時間約 2 小時<br />
-                            <br />
-                            <br />
-                            <br />
-                            【注意事項】<br />
-                            <br />
-                            ▸工作室空間有限，且課程內容有智慧財產權，為保障講師與學員權益，無法攜伴與旁聽，請見諒。<br />
-                            <br />
-                            ▸課程費用含花材/師資/提袋<br />
-                            <br />
-                            ▸若有花材/花器缺貨或品質不佳，會依狀況適時調整更換花材/花器。<br />
-                            <br />
-                            ▸若臨時有事，課程可轉讓他人，或到工作室領取成品(請於一周前通知，因花材已預留故無法退費)`,
-            courseGuildline:`10 / 18 - 基本技法<br />
-                             <br />
-                             10 / 25 - 花藝成品教學： 花漾小盆花<br />
-                             <br />
-                             11 / 1 - 花藝成品教學： 花漾珠寶盒<br />
-                             <br />
-                             11 / 8 - 花藝成品教學：花相框`,
-            courseStud:[]
-        },{
-            id:1,
-            courseName:'永恆寧靜，永生花束',
-            courseBeginDate:'2022 / 11 / 18',
-            courseTime:'19:00~21:00',
-            coursePlace:'B01',
-            courseTeacher:'Windy Liu',
-            courseMaximumStud:15,
-            courseState:'未開課',
-            courseImage:'course02.jpg',
-            courseSimpleIntro:`讓最美好的事物，靜止在瞬間<br />
-                               定格了的，不只是花，還有只屬於你我的這份安靜`,
-            courseContent:`課程大綱<br />
-                            <br />
-                            第 1 堂 - 永生花入門<br />
-                            <br />
-                                    工欲善其事，必先利其器。在開始製作花藝作品前，先了解有哪些會應用到的工具，以及常見的花藝技法，事前準備好，才不會打亂製作時的興致。<br />
-                            <br />
-                            <br />
-                            第 2 堂 - 花藝成品教學： 永生乾燥盆花<br />
-                            <br />
-                                    花藝最入門的作品之一，精緻可愛的花漾小盆花，可以擺放在書桌或客廳桌上，輕巧點綴單調的桌面喔！<br />
-                            <br />
-                            <br />
-                            第 3 堂 - 花藝成品教學： 玫瑰永生花束<br />
-                            <br />
-                                    花漾珠寶盒同時兼具美觀與實用性，放在化妝台上，可以展現出高貴的氣質，另有小抽屜，放置各式裝飾品。<br />
-                            <br />
-                            <br />
-                            第 4 堂 - 花藝成品教學：永生禮盒花<br />
-                            <br />
-                                    讓富有紀念意義的相框，保存著花朵最動人的時刻，隨時都能觀賞到美麗的畫面。<br />
-                            <br />
-                            <br />
-                            <br />
-                            一期四堂課，每堂2小時<br />
-                            每週皆有開課<br />
-                            停課會另行告知，需三天前預約報名上課<br />
-                            <br />
-                            <br />
-                            – 含花材、提袋一個<br />
-                            – 作品高約 20 公分寬約 25 公分，共 1 盆<br />
-                            – 課程時間約 2 小時<br />
-                            <br />
-                            <br />
-                            <br />
-                            【注意事項】<br />
-                            <br />
-                            ▸工作室空間有限，且課程內容有智慧財產權，為保障講師與學員權益，無法攜伴與旁聽，請見諒。<br />
-                            <br />
-                            ▸課程費用含花材/師資/提袋<br />
-                            <br />
-                            ▸若有花材/花器缺貨或品質不佳，會依狀況適時調整更換花材/花器。<br />
-                            <br />
-                            ▸若臨時有事，課程可轉讓他人，或到工作室領取成品(請於一周前通知，因花材已預留故無法退費)`,
-            courseGuildline:`11 / 18 - 永生花入門<br />
-                             <br />
-                             11 / 25 - 花藝成品教學： 永生乾燥盆花<br />
-                             <br />
-                             12 / 1 - 花藝成品教學： 玫瑰永生花束<br />
-                             <br />
-                             12 / 8 - 花藝成品教學：永生禮盒花`,
-            courseStud:[]
-        },
-    ]
-    let screenWidth = window.screen.availWidth;// 獲取螢幕寬度
-    const courseList = document.querySelector('.course-list');
-    let over992 = screenWidth>=992;
-    let courseListTemp = '';
-    courseData.forEach(o=>{
-        courseListTemp+=`<div class="row ${o.id%2==0?"flex-row":"flex-row-reverse"} justify-content-center ">
-                            <div class="col-11 col-lg-5 mb-8 mb-lg-10 mb-xl-20">
-                                <div class="courseList-img ${o.id%2==0?"imgOutline-odd":"imgOutline-even"}  w-100 radious8 shadow" style="background-image: url('assets/images/${o.courseImage}');"></div>
-                            </div>
-                            <div class="col-11 col-lg-5 mb-10">
-                                <div class="px-1 d-flex flex-column ${over992?(o.id%2!=0?'align-items-end text-end':''):''}">
-                                    <h3 class="text-dark fw-bold mb-4 mb-xl-10 ls-2helf">${o.courseName}</h3>
-                                    <p class="text-dark h5 mb-3 mb-xl-6">開課日期：${o.courseBeginDate}</p>
-                                    <p class="text-dark lh-2 mb-5 mb-xl-7">${o.courseSimpleIntro}</p>
-                                    <div class="btn-big ">
-                                        <a class="w-100"  href="course-detail.html?courseNum=${o.id}">MORE </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-    })
-    console.log(courseList)
-    courseList.innerHTML=courseListTemp;
-</script>
+<script type="javascript" src="assets/js/course-list.js"></script>
+
+
 
     <footer class="footer">
       <div class="container mb-4">
@@ -294,6 +145,7 @@
     </footer>
 
     
+    
 
     <!-- swipper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -306,3 +158,4 @@
   
 
 </html>
+
