@@ -17956,4 +17956,54 @@ footer .scale01:hover {
   color: #4b4b4b;
 }
 
+.loginImgOutline::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: 2px solid #FDEDED;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+}
+
+@media (min-width: 576px) {
+  .loginImgOutline::before {
+    top: -8px;
+    left: -8px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .loginImgOutline::before {
+    top: -16px;
+    left: -16px;
+  }
+}
+
+.loginImgOutline::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: 2px solid #F5B8B7;
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+}
+
+@media (min-width: 576px) {
+  .loginImgOutline::after {
+    bottom: -8px;
+    right: -8px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .loginImgOutline::after {
+    bottom: -16px;
+    right: -16px;
+  }
+}
+
 /*# sourceMappingURL=all.css.map */
