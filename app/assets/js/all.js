@@ -55,13 +55,24 @@ navMenu.addEventListener('click',function(){
 });
 
 
-// const courseIntro = document.querySelector('#intro-tab');
-// const courseTable = document.querySelector('#courseTable-tab');
-// courseIntro.addEventListener('click',function(){
-//   courseIntro.classList.add('courseIntroOutline');
-//   courseTable.classList.remove('courseTableOutline');
-// })
-// courseTable.addEventListener('click',function(){
-//   courseIntro.classList.remove('courseIntroOutline');
-//   courseTable.classList.add('courseTableOutline');
-// })
+const navLoginBT = document.querySelector(".navLoginBT"); // 登入按鈕
+const navMembereMenuBT = document.querySelector(".navMemberMenuBT"); // 登入後的會員選單按鈕
+const backstageManagement = document.querySelector('#backstageManagement'); // 後台管理按鈕
+const member = JSON.parse(localStorage.getItem('loginMember')); // 登入的會員
+
+if(localStorage.getItem('loginMember') != null){
+  navLoginBT.classList.add('d-none');
+  navMembereMenuBT.classList.remove('d-none');
+  navMembereMenuBT.textContent = member.name;
+  if(member.permission == 'administrator'){
+    backstageManagement.classList.remove('d-none')
+  }
+}else {
+  navLoginBT.classList.remove('d-none');
+  navMembereMenuBT.classList.add('d-none');
+}
+
+navMembereMenuBT.addEventListener('click',function(){
+  location.href = 'index.html';
+  localStorage.removeItem('loginMember');
+})

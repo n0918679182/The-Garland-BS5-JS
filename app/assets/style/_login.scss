@@ -1,0 +1,39 @@
+.loginImgOutline{
+    &::before{
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        border: 2px solid #FDEDED;
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        @include sm{
+            top: -8px;
+            left: -8px; 
+        }
+        @include xl{
+            top: -16px;
+            left: -16px;
+        }
+    }
+    &::after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        border: 2px solid #F5B8B7;
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        @include sm{
+            bottom: -8px;
+            right: -8px; 
+        }
+        @include xl{
+            bottom: -16px;
+            right: -16px;
+           
+        }
+    }
+}

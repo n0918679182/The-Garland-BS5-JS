@@ -2,8 +2,8 @@ let url = location.href;//取得網址
 let articalNum = parseInt(url.substring(url.indexOf('=')+1,url.length));//取得網址參數並轉成數字
 const blogArticalContent = document.querySelector('.blogArticalContent');//取得html要渲染的div
 
-axios.get('http://localhost:3000/blogArtical').then(function(response){
-        console.log(response.data);
+axios.get('http://localhost:3000/blogArticals').then(function(response){
+        // console.log(response.data);
         blogArticalRender(response.data)
 });
 
