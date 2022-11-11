@@ -1,5 +1,5 @@
 ---
-title: Boostrap Index
+title: The Garland - 花藝課程
 layout: ./app/layout.ejs
 engine: ejs
 current: index
@@ -33,15 +33,13 @@ current: index
 </div>
 
 <script>
-    let screenWidth = window.screen.availWidth;// 獲取螢幕寬度
-    const courseList = document.querySelector('.course-list');
-    console.log(courseList);
-    let over992 = screenWidth >= 992;
-    let courseListTemp = '';
+    var screenWidth = window.screen.availWidth;// 獲取螢幕寬度
+    var courseList = document.querySelector('.course-list');
+    var over992 = screenWidth >= 992;
+    var courseListTemp = '';
 
     axios.get('http://localhost:3000/courses').then(function (response) {
 
-        console.log(response.data);
         courseListRender(response.data);
     });
 
@@ -60,7 +58,7 @@ current: index
                                     <p class="text-dark h5 mb-3 mb-xl-6">開課日期：${o.courseBeginDate}</p>
                                     <p class="text-dark lh-2 mb-5 mb-xl-7">${o.courseSimpleIntro}</p>
                                     <div class="btn-big ">
-                                        <a class="w-100"  href="course-detail.html?courseNum=${o.id}">MORE </a>
+                                        <a class="w-100"  href="course-detail.html?id=${o.id-1}">MORE </a>
                                     </div>
                                 </div>
                             </div>

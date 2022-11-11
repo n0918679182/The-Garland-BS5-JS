@@ -8,6 +8,7 @@
 
 @import './layout/navbar.scss';
 @import 'layout/footer';
+@import 'layout/admin.scss';
 
 @import 'index/banner';
 @import 'index/works';
@@ -21,3 +22,5 @@
 @import 'course/course-detail';
 
 @import 'login';
+
+@import 'admin/course';

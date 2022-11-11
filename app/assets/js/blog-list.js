@@ -1,7 +1,7 @@
 const blogContent = document.querySelector('.blogContent'); // 要渲染的div
 let blogListtemp = '';//迴圈暫存字串變數
 
-axios.get('http://localhost:3000/blogArticals').then(function(response){
+axios.get('http://localhost:3000/blogArticles').then(function(response){
     // console.log(response.data);
     blogListRender(response.data)
 });

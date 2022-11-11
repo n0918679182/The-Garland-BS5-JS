@@ -1,0 +1,345 @@
+---
+title: The Garland - 課程管理
+layout: ./app/adminLayout.ejs
+engine: ejs
+current: index
+---
+
+<div class="pt-4 d-flex justify-content-between align-items-center mb-10">
+    <h2 class="h3 text-dark fw-bold">課程管理</h2>
+    <div class="btn-small">
+        <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" data-bs-toggle="modal" data-bs-target="#courseTable">新增課程</a>
+    </div>
+</div>
+<div class="row" id="adminCourseArea">
+    <div class="col-4 mb-5">
+        <div class="border border-dark border-2 rounded px-3 py-5">
+            <h3 class="h5 fw-bolder text-dark mb-8">從零開始，花藝世界</h3>
+            <ul class="list-unstyled">
+                <li class="mb-3">開課日期：2022 / 10 / 18</li>
+                <li class="mb-3">開課狀態：已開課</li>
+                <li class="mb-3">報名人數：8 / 15 位</li>
+                <li class="mb-3">講師：Andy Wu</li>
+                <li>教室：B02</li>
+            </ul>
+            <div class="d-flex justify-content-between">
+                <div class="btn-small">
+                    <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#">編輯課程</a>
+                </div>
+                <div class="btn-small">
+                    <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#">刪除課程</a>
+                </div>
+                <div class="btn-small">
+                    <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#">學員名單</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- 課程表單 Modal -->
+<div class="modal fade" id="courseTable" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title h3 fw-bold text-dark" id="modalTitle">新增課程</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+              <div class="col-4 mb-4">
+                <input type="text" class="form-control" id="courseName" placeholder="請輸入課程名稱">
+              </div>
+              <div class="col-2 mb-4">
+                <select id="courseRoom" class="form-select">
+                    <option selected value="0">請選擇教室</option>
+                    <option value="B01">B01</option>
+                    <option value="B02">B02</option>
+                    <option value="B03">B03</option>
+                  </select>
+              </div>
+              <div class="col-2 mb-4">
+                <select id="courseTeacher" class="form-select">
+                    <option selected value="0">請選擇老師</option>
+                    <option value="Andy Wu">Andy Wu</option>
+                    <option value="Windy Liu">Windy Liu</option>
+                    <option value="Luna Chen">Luna Chen</option>
+                  </select>
+              </div>
+              <div class="col-4 mb-4">
+                <label for="file-uploader" class="btn btn-outline-dark w-100">請選擇圖片</label>
+                <input type="file" class="form-control d-none" id="file-uploader" data-imgName="" accept=".png, .jpg, .jpeg">
+              </div>
+
+              <div class="col-3 mb-4">
+                <input type="text" class="form-control" id="courseBeginDate" placeholder="開課日期 ex: 2022/09/03">
+              </div>
+              <div class="col-3 mb-4">
+                <input type="text" class="form-control" id="courseTime" placeholder="請輸入上課時間">
+              </div>
+              <div class="col-3 mb-4 d-flex align-items-center">
+                <label for="coursePrice" class="form-label mb-0 me-1">課程價格：</label>
+                <input type="text" class="form-control px-1" id="coursePrice" style="width: 60% !important ;">
+              </div>
+              <div class="col-3 mb-4  d-flex align-items-center">
+                <label for="studLimit" class="form-label mb-0 me-1">學生上限：</label>
+                <input type="text" class="form-control px-1" id="studLimit" style="width: 60% !important ;">
+              </div>
+
+              <div class="col-12 mb-4">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="courseSimpleIntro" style="height: 150px"></textarea>
+                    <label for="courseSimpleIntro" class="text-dark">課程簡介</label>
+                  </div>
+              </div>
+
+              <div class="col-7">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="courseContent" style="height: 300px"></textarea>
+                    <label for="courseContent" class="text-dark">詳細介紹</label>
+                  </div>
+              </div>
+
+              <div class="col-5 ">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="courseGuildline" style="height: 300px"></textarea>
+                    <label for="courseGuildline" class="text-dark">教學日程</label>
+                  </div>
+              </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="cancelBT">取消</button>
+          <button type="button" class="btn btn-dark" id="newCourseBT">新增</button>
+          <button type="button" class="btn btn-dark d-none" id="updateCourseBT">更新</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- 刪除課程警告 Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px !important;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">確定要刪除嗎?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-10">
+          <p class="text-dark mb-0 h4 fw-bolder" style="line-height:1.5;">刪除課程將導致無法還原的結果，請謹慎考慮再進行刪除</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">取消刪除</button>
+          <button type="button" class="btn btn-danger" onclick="deleteCourse()">確定刪除</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+    // 控制左側選單 選中時的效果
+    localStorage.setItem("pageCode",2);
+    
+    // 所有表單欄位
+    const courseName = document.getElementById('courseName');
+    const courseRoom = document.getElementById('courseRoom');
+    const courseTeacher = document.getElementById('courseTeacher');
+    const fileUploader = document.getElementById('file-uploader');
+    const courseBeginDate = document.getElementById('courseBeginDate');
+    const courseTime = document.getElementById('courseTime');
+    const coursePrice = document.getElementById('coursePrice');
+    const studLimit = document.getElementById('studLimit');
+    const courseSimpleIntro = document.getElementById('courseSimpleIntro');
+    const courseContent = document.getElementById('courseContent');
+    const courseGuildline = document.getElementById('courseGuildline');
+    
+    const modalTitle = document.getElementById('modalTitle');               // model標題
+    const cancelBT = document.getElementById('cancelBT');                   // 取消按鈕
+    const newCourseBT = document.getElementById('newCourseBT');             // 新增課程按鈕
+    const updateCourseBT = document.getElementById('updateCourseBT');       // 編輯課程按鈕
+    const btnClose = document.querySelector('.btn-close');                  // 叉叉按鈕
+    let imgName = '';                                                       // 儲存上傳的圖片的變數
+    const adminCourseArea = document.getElementById('adminCourseArea');     // 要渲染所有課程的區塊
+    let renderAdminCourseTemp = '';                                         // 儲存渲染的HTML的變數
+    let renderUpdateCourseFun;                                              // 儲存axios裡面方法的變數
+    let getCourseId;                                                        // 儲存axios裡面方法的變數
+    let updateCourseId;                                                     // 儲存點擊編輯後產生的課程id
+    let deleteCourseId;                                                     // 儲存點擊刪除後產生的課程id
+
+
+
+    // 獲取上傳的圖片資訊
+    fileUploader.addEventListener('change',e=>{
+        imgName = e.target.files[0].name;
+    });
+
+    // 新增課程的關閉按鈕
+    cancelBT.addEventListener('click',e=>{
+        clearNewCourseTable();
+    });
+    btnClose.addEventListener('click', e=>{
+        clearNewCourseTable();
+    });
+
+    // 新增課程
+    newCourseBT.addEventListener('click',e=>{
+        let newCourseObj = {};
+        newCourseObj.id=null;
+        newCourseObj.courseName = courseName.value;
+        newCourseObj.courseBeginDate = courseBeginDate.value;
+        newCourseObj.courseTime = courseTime.value;
+        newCourseObj.coursePlace = courseRoom.value;
+        newCourseObj.courseTeacher = courseTeacher.value;
+        newCourseObj.courseMaximumStud = studLimit.value;
+        newCourseObj.courseState = "未開課";
+        newCourseObj.courseImage = imgName;
+        newCourseObj.courseSimpleIntro = changeNewLineTag(courseSimpleIntro.value);
+        newCourseObj.courseContent = changeNewLineTag(courseContent.value);
+        newCourseObj.courseGuildline = changeNewLineTag(courseGuildline.value);
+        newCourseObj.coursePrice = coursePrice.value;
+        axios.post('http://localhost:3000/courses',newCourseObj).then(function(resp){
+            console.log("123"+resp.data)
+        });
+        alert('新建成功!');
+        btnClose.click();
+        location.href = 'admin-course.html';
+    })
+
+    // 清空新增課程的資料表
+    function clearNewCourseTable(){
+        courseName.value="";
+        courseRoom.value="0";
+        courseTeacher.value="0";
+        fileUploader.value="";
+        courseBeginDate.value="";
+        courseTime.value="";
+        coursePrice.value="";
+        studLimit.value="";
+        courseSimpleIntro.value="";
+        courseContent.value="";
+        courseGuildline.value="";
+    }
+
+    // 將換行符號 \n 改成html標籤
+    function changeNewLineTag(str){
+      return str.split('\n').join('<br />');
+    }
+    // 將換行符號 html標籤 改成 \n 
+    function changeNewLineTagInHTML(str){
+      return str.split('<br />').join('\n');
+    }
+    
+    // 渲染畫面
+    Promise.all([axios.get('http://localhost:3000/courses'),axios.get('http://localhost:3000/courseOrders')])
+    .then( (response) => {
+        const courseArray = response[0].data;
+        const orderArray = response[1].data;
+        renderAdminCourse(courseArray, orderArray);
+        // 渲染admin編輯課程
+        renderUpdateCourseFun =function renderUpdateCourse(courseId){
+            const theCourse = courseArray.filter(o=>o.id == courseId)[0];
+            modalTitle.textContent = "編輯課程";
+            updateCourseBT.classList.remove('d-none');
+            newCourseBT.classList.add('d-none');
+            updateCourseId = theCourse.id;
+
+            // 將db的資料渲染給表單
+            courseName.value = theCourse.courseName;
+            courseBeginDate.value = theCourse.courseBeginDate;
+            courseTime.value = theCourse.courseTime;
+            courseRoom.value = theCourse.coursePlace;
+            courseTeacher.value = theCourse.courseTeacher;
+            studLimit.value = theCourse.courseMaximumStud;
+            // fileUploader.value = theCourse.courseImage;
+            fileUploader.dataset.imgName = theCourse.courseImage;
+            courseSimpleIntro.value = changeNewLineTagInHTML(theCourse.courseSimpleIntro);
+            courseContent.value = changeNewLineTagInHTML(theCourse.courseContent);
+            courseGuildline.value = changeNewLineTagInHTML(theCourse.courseGuildline);
+            coursePrice.value = theCourse.coursePrice;
+            console.log(fileUploader.dataset.imgName);
+        }
+        getCourseId = function getId(courseId){
+            const theCourse = courseArray.filter(o=>o.id == courseId)[0];
+            deleteCourseId = theCourse.id;
+        }
+    })
+
+    // 渲染admin課程管理的方法
+    function renderAdminCourse(courseArray, orderArray){
+
+        courseArray.forEach(o=>{
+            renderAdminCourseTemp+=
+            `<div class="col-4 mb-5">
+                <div class="border border-dark border-2 rounded px-3 py-5">
+                    <h3 class="h5 fw-bolder text-dark mb-8">${o.courseName}</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">開課日期： ${o.courseBeginDate}</li>
+                        <li class="mb-3">開課狀態： ${o.courseState}</li>
+                        <li class="mb-3">報名人數：${orderArray.filter(a=>a.courseId==o.id).length} / ${o.courseMaximumStud} 位</li>
+                        <li class="mb-3">講師： ${o.courseTeacher}</li>
+                        <li>教室： ${o.coursePlace}</li>
+                    </ul>
+                    <div class="d-flex justify-content-between">
+                        <div class="btn-small">
+                            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" data-bs-toggle="modal" data-bs-target="#courseTable" onclick="getFuncInAxios(${o.id})">編輯課程</a>
+                        </div>
+                        <div class="btn-small">
+                            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getCourseIdFromeAxios(${o.id})">刪除課程</a>
+                        </div>
+                        <div class="btn-small">
+                            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#">學員名單</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        })
+        adminCourseArea.innerHTML = renderAdminCourseTemp;
+    }
+
+    // 用來使渲染課程裡的編輯課程中的onlick可以觸發
+    function getFuncInAxios(id){
+        renderUpdateCourseFun(id);          // 從axios中撈資料
+    }
+
+    // 點擊刪除按紐時 將id存到deleteCourseId變數
+    function getCourseIdFromeAxios(id){
+        getCourseId(id);
+    }
+
+    // 更新課程資訊
+    updateCourseBT.addEventListener('click',e=>{
+        let data = {};
+        data.courseName = courseName.value;
+        data.courseBeginDate = courseBeginDate.value;
+        data.courseTime = courseTime.value;
+        data.coursePlace = courseRoom.value;
+        data.courseTeacher = courseTeacher.value;
+        data.courseMaximumStud = studLimit.value;
+        data.courseImage = imgName==''?fileUploader.dataset.imgName:imgName;
+        data.courseSimpleIntro = changeNewLineTag(courseSimpleIntro.value);
+        data.courseContent = changeNewLineTag(courseContent.value);
+        data.courseGuildline = changeNewLineTag(courseGuildline.value);
+        data.coursePrice = coursePrice.value;
+
+        axios.patch("http://localhost:3000/courses/"+updateCourseId, data).then(res=>{ 
+            console.log(res, 'patch')
+            location.href = 'admin-course.html';
+        });
+       
+    })
+
+    // 刪除課程
+    function deleteCourse() { 
+        axios.delete("http://localhost:3000/courses/"+deleteCourseId).then(res=>{ 
+            console.log(res, 'patch')
+            location.href = 'admin-course.html';
+        });
+    }
+    
+
+
+
+</script>

@@ -27,6 +27,29 @@
         align-items: center;
     }
 }
+.btn-small{
+    border-radius: 8px;
+    background: #E95F5C;
+    &:hover{
+        background: #E33430;
+    }
+    color: #fff;
+    width: 100%;
+    transition: .3s;
+    width: 80px;
+    a{
+        color: #fff !important;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        padding: 0;
+        width: 80px;
+        height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 .title-underline{
     width: 60px;
     height: 6px;

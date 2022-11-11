@@ -1,0 +1,36 @@
+.sideMenu{
+    li{
+        &:hover{
+            a{
+                color: #E95F5C !important;
+                position: relative;
+                &::after{
+                    content: '';
+                    background: #E95F5C;
+                    height: 2px;
+                    width: 100%;
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                }
+            }
+            
+        }
+    }
+}
+
+.onPage{
+    a{
+        color: #E95F5C !important;
+        position: relative;
+        &::after{
+            content: '';
+            background: #E95F5C;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+        }
+    }
+}

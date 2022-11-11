@@ -57,7 +57,7 @@ navMenu.addEventListener('click',function(){
 
 const navLoginBT = document.querySelector(".navLoginBT"); // 登入按鈕
 const navMembereMenuBT = document.querySelector(".navMemberMenuBT"); // 登入後的會員選單按鈕
-const backstageManagement = document.querySelector('#backstageManagement'); // 後台管理按鈕
+const adminPanel = document.querySelector('#adminPanel'); // 後台管理按鈕
 const member = JSON.parse(localStorage.getItem('loginMember')); // 登入的會員
 
 if(localStorage.getItem('loginMember') != null){
@@ -65,7 +65,7 @@ if(localStorage.getItem('loginMember') != null){
   navMembereMenuBT.classList.remove('d-none');
   navMembereMenuBT.textContent = member.name;
   if(member.permission == 'administrator'){
-    backstageManagement.classList.remove('d-none')
+    adminPanel.classList.remove('d-none')
   }
 }else {
   navLoginBT.classList.remove('d-none');
