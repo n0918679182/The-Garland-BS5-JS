@@ -17440,6 +17440,40 @@ button, button:focus {
   }
 }
 
+.btn-small {
+  border-radius: 8px;
+  background: #E95F5C;
+  color: #fff;
+  width: 100%;
+  -webkit-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  width: 80px;
+}
+
+.btn-small:hover {
+  background: #E33430;
+}
+
+.btn-small a {
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  padding: 0;
+  width: 80px;
+  height: 42px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .title-underline {
   width: 60px;
   height: 6px;
@@ -17520,6 +17554,36 @@ footer .scale01:hover {
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.sideMenu li:hover a {
+  color: #E95F5C !important;
+  position: relative;
+}
+
+.sideMenu li:hover a::after {
+  content: '';
+  background: #E95F5C;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.onPage a {
+  color: #E95F5C !important;
+  position: relative;
+}
+
+.onPage a::after {
+  content: '';
+  background: #E95F5C;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
 }
 
 .banner-bg {
@@ -18004,6 +18068,10 @@ footer .scale01:hover {
     bottom: -16px;
     right: -16px;
   }
+}
+
+.modal-dialog {
+  max-width: 1000px !important;
 }
 
 /*# sourceMappingURL=all.css.map */

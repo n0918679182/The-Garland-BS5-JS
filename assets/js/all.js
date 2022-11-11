@@ -1,4 +1,5 @@
 "use strict";
+"use strict";
 
 var swiper = new Swiper(".bannerSwiper", {
   speed: 2000,
@@ -56,7 +57,7 @@ var navLoginBT = document.querySelector(".navLoginBT"); // 登入按鈕
 
 var navMembereMenuBT = document.querySelector(".navMemberMenuBT"); // 登入後的會員選單按鈕
 
-var backstageManagement = document.querySelector('#backstageManagement'); // 後台管理按鈕
+var adminPanel = document.querySelector('#adminPanel'); // 後台管理按鈕
 
 var member = JSON.parse(localStorage.getItem('loginMember')); // 登入的會員
 
@@ -66,7 +67,7 @@ if (localStorage.getItem('loginMember') != null) {
   navMembereMenuBT.textContent = member.name;
 
   if (member.permission == 'administrator') {
-    backstageManagement.classList.remove('d-none');
+    adminPanel.classList.remove('d-none');
   }
 } else {
   navLoginBT.classList.remove('d-none');
@@ -85,7 +86,7 @@ var articalNum = parseInt(url.substring(url.indexOf('=') + 1, url.length)); //�
 
 var blogArticalContent = document.querySelector('.blogArticalContent'); //取得html要渲染的div
 
-axios.get('http://localhost:3000/blogArticals').then(function (response) {
+axios.get('http://localhost:3000/blogArticles').then(function (response) {
   // console.log(response.data);
   blogArticalRender(response.data);
 });
@@ -99,7 +100,7 @@ var blogContent = document.querySelector('.blogContent'); // 要渲染的div
 
 var blogListtemp = ''; //迴圈暫存字串變數
 
-axios.get('http://localhost:3000/blogArticals').then(function (response) {
+axios.get('http://localhost:3000/blogArticles').then(function (response) {
   // console.log(response.data);
   blogListRender(response.data);
 });
@@ -116,29 +117,31 @@ var url = location.href;
 var articalNum = parseInt(url.substring(url.indexOf('=') + 1, url.length)); //取得網址參數並轉成數字
 
 axios.get('http://localhost:3000/courses').then(function (response) {
+  courseDetailRender(response.data); // courseTable(response.data);
+});
+axios.get("http://localhost:3000/courseOrders?courseId=".concat(articalNum + 1)).then(function (response) {
+  var member = JSON.parse(localStorage.getItem('loginMember'));
+  console.log("member: " + member.id);
   console.log(response.data);
-  courseDetailRender(response.data);
+  var courseStud = document.querySelector('.courseStud');
+  courseStud.textContent = response.data.length;
 });
 var courseId = document.querySelector('#courseId');
 var studName = document.querySelector('#studName');
 var studPhoneNum = document.querySelector('#studPhoneNum');
 var studMail = document.querySelector('#studMail');
 var courseTableBtn = document.querySelector('#courseTableBtn');
-courseTableBtn.addEventListener('click', function () {
-  var obj = {};
-  obj.courseId = courseId.value;
-  obj.studName = studName.value;
-  obj.studPhoneNum = studPhoneNum.value;
-  obj.studMail = studMail.value;
-  console.log(obj);
-  alert('資料送出成功');
-  courseId.value = '';
-  studName.value = '';
-  studPhoneNum.value = '';
-  studMail.value = '';
-});
+var member = JSON.parse(localStorage.getItem('loginMember'));
+
+if (localStorage.getItem('loginMember') != null) {
+  studName.value = member.name;
+  studPhoneNum.value = member.phone;
+  studMail.value = member.mail;
+} // 渲染頁面
+
 
 function courseDetailRender(aryData) {
+  courseId.value = articalNum;
   var titles = document.querySelectorAll('.title-js');
   titles.forEach(function (o) {
     return o.innerHTML = aryData[articalNum].courseName;
@@ -148,31 +151,38 @@ function courseDetailRender(aryData) {
   var courseBeginDate = document.querySelector('.courseBeginDate');
   courseBeginDate.innerHTML = "\u958B\u8AB2\u65E5\u671F\uFF1A ".concat(aryData[articalNum].courseBeginDate);
   var coursePrice = document.querySelector('.coursePrice');
-  coursePrice.innerHTML = "NT$ ".concat(aryData[articalNum].coursePrice);
-  var courseStudNum = document.querySelector('.courseStudNum');
-  courseStudNum.innerHTML = "\u5DF2\u5831\u540D\u4EBA\u6578 ".concat(aryData[articalNum].courseStud.length, " / ").concat(aryData[articalNum].courseMaximumStud);
+  coursePrice.innerHTML = "NT$ ".concat(aryData[articalNum].coursePrice); // const courseStudNum = document.querySelector('.courseStudNum');
+  // courseStudNum.innerHTML = `已報名人數 ${aryData[articalNum].courseStud.length} / ${aryData[articalNum].courseMaximumStud}`;
+
+  var courseLimit = document.querySelector('.courseLimit');
+  courseLimit.textContent = aryData[articalNum].courseMaximumStud;
   var courseContent = document.querySelector('.courseContent');
   courseContent.innerHTML = aryData[articalNum].courseContent;
-}
-"use strict";
+} // 送出課程訂單
 
-var screenWidth = window.screen.availWidth; // 獲取螢幕寬度
 
-var courseList = document.querySelector('.course-list');
-console.log(courseList);
-var over992 = screenWidth >= 992;
-var courseListTemp = '';
-axios.get('http://localhost:3000/course').then(function (response) {
-  console.log(response.data);
-  courseListRender(response.data);
+courseTableBtn.addEventListener('click', function () {
+  if (member == null) {
+    alert('請先登入喔!');
+    location.href = 'login.html';
+  } else {
+    var obj = {};
+    obj.id = null;
+    obj.userId = member.id;
+    obj.courseId = articalNum + 1;
+    axios.post('http://localhost:3000/courseOrders', obj).then(function (resp) {
+      console.log("123" + resp.data);
+    });
+    alert('資料送出成功');
+  } // 清空表單
+
+
+  courseId.value = '';
+  studName.value = '';
+  studPhoneNum.value = '';
+  studMail.value = '';
 });
-
-function courseListRender(aryData) {
-  aryData.forEach(function (o) {
-    courseListTemp += "<div class=\"row ".concat(o.id % 2 == 0 ? "flex-row" : "flex-row-reverse", " justify-content-center \">\n                            <div class=\"col-11 col-lg-5 mb-8 mb-lg-10 mb-xl-20\">\n                                <div class=\"courseList-img ").concat(o.id % 2 == 0 ? "imgOutline-odd" : "imgOutline-even", "  w-100 radious8 shadow\" style=\"background-image: url('assets/images/").concat(o.courseImage, "');\"></div>\n                            </div>\n                            <div class=\"col-11 col-lg-5 mb-10\">\n                                <div class=\"px-1 d-flex flex-column ").concat(over992 ? o.id % 2 != 0 ? 'align-items-end text-end' : '' : '', "\">\n                                    <h3 class=\"text-dark fw-bold mb-4 mb-xl-10 ls-2helf\">").concat(o.courseName, "</h3>\n                                    <p class=\"text-dark h5 mb-3 mb-xl-6\">\u958B\u8AB2\u65E5\u671F\uFF1A").concat(o.courseBeginDate, "</p>\n                                    <p class=\"text-dark lh-2 mb-5 mb-xl-7\">").concat(o.courseSimpleIntro, "</p>\n                                    <div class=\"btn-big \">\n                                        <a class=\"w-100\"  href=\"course-detail.html?courseNum=").concat(o.id, "\">MORE </a>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>");
-  });
-  courseList.innerHTML = courseListTemp;
-}
+"use strict";
 "use strict";
 
 var account = document.getElementById("account");
