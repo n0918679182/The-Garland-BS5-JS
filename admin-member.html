@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Garland - 課程管理</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- material icons -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
+    
+    <!-- swipper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+    <!-- my css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/style/all.css">
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+      <div class="container">
+        
+        <div class="row">
+            <div class="col-2 vh-100 pt-8 d-flex flex-column align-items-center fixed-top">
+                <a href="index.html"><img src="assets/images/Logo-big.png" alt="The Garland" style="width:140px;"></a>
+                <nav class="d-flex flex-column w-100" style=" margin-top:114px;">
+                    <ul class="list-unstyled text-center sideMenu">
+                      <li class="mb-14" id="coursePage">
+                          <a href="admin-course.html" class="text-dark h4">課程管理</a>
+                      </li>
+                      <li class="mb-14" id="memberPage">
+                          <a href="admin-member.html" class="text-dark h4">會員資訊</a>
+                      </li>
+                      <li id="ConsultationPage">
+                          <a href="#" class="text-dark h4" onclick="logout()">管理員登出</a>
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-10 p-8">
+              
+<div class="pt-4 d-flex justify-content-between align-items-center mb-15">
+    <h2 class="h3 text-dark fw-bold">會員資訊</h2>
+    <div class="d-flex align-items-center">
+        <input  class="form-control w-75 me-3" type="text" placeholder="請輸入關鍵字" id="searchMember">
+        <div class="btn-small">
+            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" onclick="searchMember()" id="searchMemberBT">查詢</a>
+        </div>
+    </div>
+</div>
+<ul class="list-unstyled row px-10 pt-2" id="memberListRenderArea">
+
+    <!-- <li class="col-2 mb-13">
+        <div class="rounded-circle bg-primary60 d-flex justify-content-center align-items-center memberPic" data-bs-toggle="modal" data-bs-target="#memberModal">
+            <h3 class="h5 text-white m-0">王曉明</h3>
+        </div>
+    </li> -->
+
+</ul>
+
+<!-- 會員資料 Modal -->
+<div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="memberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered adminMemberModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-dark" id="memberModalLabel">王曉明</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex flex-column px-10">
+          <div class="d-flex mb-1">
+            <p class="m-0 ">帳號 :</p>
+            <p class="m-0 ms-2" id="mAccount"> gggg123</p>
+          </div>
+          <div class="d-flex mb-1">
+            <p class="m-0 ">密碼 :</p>
+            <p class="m-0 ms-2" id="mPwd"> gggg456</p>
+          </div>
+          <div class="d-flex mb-1">
+            <p class="m-0 ">信箱 :</p>
+            <p class="m-0 ms-2" id="mMail"> gggg123@gmail.com</p>
+          </div>
+          <div class="d-flex mb-1">
+            <p class="m-0 ">電話 :</p>
+            <p class="m-0 ms-2" id="mPhone"> 0912345678</p>
+          </div>
+          <div class="d-flex mb-1">
+            <p class="m-0 ">地址 :</p>
+            <p class="m-0 ms-2" id="mAddress"> 台中市東區東光路64號</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#deleteMemberModal" onclick="didappearArea()">註銷會員</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 註銷會員資料 Modal -->
+<div class="modal fade" id="deleteMemberModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="deleteMemberModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered adminMemberModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="deleteMemberModalLabel">確定要註銷會員嗎?</h5>
+      </div>
+      <div class="modal-body d-flex flex-column px-10">
+        <p class="m-0 fw-bolder text-dark h4">請注意! 註銷後將無法再復原，請謹慎操作!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="appearArea()">取消</button>
+        <button type="button" class="btn btn-danger" data-memberId="" id="deleteMemberBT" onclick="deleteMember()">確定註銷</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+    // 控制左側選單 選中時的效果
+    localStorage.setItem("pageCode",1);
+
+    const memberListRenderArea = document.getElementById('memberListRenderArea');   // 渲染會員清單的區域
+    let memberListTemp = '';                                                        // 暫存渲染的HTML
+
+    // 渲染會員清單
+    axios.get('http://localhost:3000/users').then(resp=>{
+      renderMemberList(resp.data);
+    })
+
+    // 渲染會員清單的方法
+    function renderMemberList (aryData) { 
+      aryData.forEach(o=>{
+        if(o.permission == "administrator"){
+          return;
+        }else{
+          let n = o.name;
+          memberListTemp+=
+          `<li class="col-2 mb-13">
+              <a class="rounded-circle bg-primary60 d-flex justify-content-center align-items-center memberPic" 
+                   data-bs-toggle="modal" data-bs-target="#memberModal" onclick="renderMemberModal('${o.id}')">
+                  <h3 class="h5 text-white m-0">${o.name}</h3>
+              </a>
+          </li>`;
+        }
+      });
+      memberListRenderArea.innerHTML = memberListTemp;
+    }
+
+    // 渲染會員modal的方法
+    function renderMemberModal(oid){
+      const mName = document.getElementById('memberModalLabel');
+      const mAccount = document.getElementById('mAccount');
+      const mPwd = document.getElementById('mPwd');
+      const mMail = document.getElementById('mMail');
+      const mPhone = document.getElementById('mPhone');
+      const mAddress = document.getElementById('mAddress');
+      const deleteMemberBT = document.getElementById('deleteMemberBT');
+      
+      axios.get('http://localhost:3000/users/'+oid).then(resp=>{
+        let obj = resp.data;
+        mName.textContent = obj.name;
+        mAccount.textContent = obj.account;
+        mPwd.textContent = obj.password;
+        mMail.textContent = obj.mail;
+        mPhone.textContent = obj.phone;
+        mAddress.textContent = obj.address;
+        deleteMemberBT.dataset.memberId = obj.id;
+      })
+      
+    }
+    
+    // 讓原本的對話框消失
+    function didappearArea(){
+      console.log('didappearArea')
+      document.querySelector('.adminMemberModal').classList.add('op0');
+    }
+    // 回復消失的對話框
+    function appearArea(){
+      document.querySelector('.adminMemberModal').classList.remove('op0')
+    }
+    
+    // 刪除會員的方法
+    function deleteMember(){
+      const deleteMemberBT = document.getElementById('deleteMemberBT');
+      let memberId = deleteMemberBT.dataset.memberId;
+      axios.delete('http://localhost:3000/users/'+memberId).then(resp=>{
+        location.href = 'admin-member.html';
+      })
+    }
+
+    // 偵測enter
+    document.getElementById('searchMember').addEventListener('keypress',e=>{
+      if (e.key === 'Enter') {
+        document.getElementById('searchMemberBT').click();
+      }
+       
+    })
+
+    // 關鍵字搜尋並重新渲染畫面
+    function searchMember(){
+      const keyword = document.getElementById('searchMember');
+      if(keyword.value == ''){
+        axios.get('http://localhost:3000/users').then(resp=>{
+          memberListTemp='';
+          renderMemberList(resp.data);
+        })
+      }else{
+        axios.get('http://localhost:3000/users?q='+keyword.value).then(resp=>{
+          memberListTemp='';
+          renderMemberList(resp.data);
+        })
+      }
+      
+    }
+
+
+</script>
+            </div>
+        </div>
+      </div>
+    
+    
+
+    <!-- swipper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!-- my js -->
+    <script src="./assets/js/vendors.js"></script>
+    <script type="javascript" src="./assets/js/admin-all.js"></script>
+    
+      <script>
+          const pageCode = localStorage.getItem('pageCode');
+          const memberPage = document.getElementById('memberPage');
+          const coursePage = document.getElementById('coursePage');
+          const ConsultationPage = document.getElementById('ConsultationPage');
+          if(pageCode == 0){
+            memberPage.classList.remove('onPage');
+            coursePage.classList.remove('onPage');
+            ConsultationPage.classList.remove('onPage');
+          } else if(pageCode == 1){
+            memberPage.classList.add('onPage');
+            coursePage.classList.remove('onPage');
+            ConsultationPage.classList.remove('onPage');
+          } else if(pageCode == 2){
+            memberPage.classList.remove('onPage');
+            coursePage.classList.add('onPage');
+            ConsultationPage.classList.remove('onPage');
+          } else if(pageCode == 3){
+            memberPage.classList.remove('onPage');
+            coursePage.classList.remove('onPage');
+            ConsultationPage.classList.add('onPage');
+          }
+
+          function logout(){
+            location.href = 'index.html';
+            localStorage.removeItem('loginMember');
+          }
+      </script>
+  </body>
+  
+
+</html>
+

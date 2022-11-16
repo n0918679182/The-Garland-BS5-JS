@@ -34,14 +34,14 @@
                 <a href="index.html"><img src="assets/images/Logo-big.png" alt="The Garland" style="width:140px;"></a>
                 <nav class="d-flex flex-column w-100" style=" margin-top:114px;">
                     <ul class="list-unstyled text-center sideMenu">
-                      <li class="mb-14" id="orderPage">
-                          <a href="#" class="text-dark h4">訂單查詢</a>
-                      </li>
                       <li class="mb-14" id="coursePage">
-                          <a href="#" class="text-dark h4">課程管理</a>
+                          <a href="admin-course.html" class="text-dark h4">課程管理</a>
+                      </li>
+                      <li class="mb-14" id="memberPage">
+                          <a href="admin-member.html" class="text-dark h4">會員資訊</a>
                       </li>
                       <li id="ConsultationPage">
-                          <a href="#" class="text-dark h4">諮詢回覆</a>
+                          <a href="#" class="text-dark h4" onclick="logout()">管理員登出</a>
                       </li>
                     </ul>
                 </nav>
@@ -56,7 +56,7 @@
     </div>
 </div>
 <div class="row" id="adminCourseArea">
-    <div class="col-4 mb-5">
+    <!-- <div class="col-4 mb-5">
         <div class="border border-dark border-2 rounded px-3 py-5">
             <h3 class="h5 fw-bolder text-dark mb-8">從零開始，花藝世界</h3>
             <ul class="list-unstyled">
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     
 </div>
 
@@ -169,7 +169,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 500px !important;">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">確定要刪除嗎?</h5>
+          <h5 class="modal-title h3 fw-bold text-dark" id="staticBackdropLabel">確定要刪除嗎?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-10">
@@ -182,6 +182,42 @@
       </div>
     </div>
 </div>
+
+<!-- 學生名單 Modal -->
+<div class="modal fade" id="studList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title h3 fw-bold text-dark" id="exampleModalLabel">學生名單 <span class="h5 text-dark ms-3">/</span> <span class="h6 text-dark ms-3" id="studList-courseName">123</span> </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="min-height:50vh ;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">姓名</th>
+              <th scope="col">信箱</th>
+              <th scope="col">電話</th>
+              <th scope="col">刪除</th>
+            </tr>
+          </thead>
+          <tbody id="studListBody">
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
     // 控制左側選單 選中時的效果
@@ -212,7 +248,9 @@
     let getCourseId;                                                        // 儲存axios裡面方法的變數
     let updateCourseId;                                                     // 儲存點擊編輯後產生的課程id
     let deleteCourseId;                                                     // 儲存點擊刪除後產生的課程id
-
+    const studListCourseName = document.getElementById('studList-courseName'); // 學生名單的課程標題
+    const studListBody = document.getElementById('studListBody');           // 要渲染學生名單的區塊
+    
 
 
     // 獲取上傳的圖片資訊
@@ -334,7 +372,7 @@
                             <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getCourseIdFromeAxios(${o.id})">刪除課程</a>
                         </div>
                         <div class="btn-small">
-                            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#">學員名單</a>
+                            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" data-bs-toggle="modal" data-bs-target="#studList" onclick="renderStudentList(${o.id})">學員名單</a>
                         </div>
                     </div>
                 </div>
@@ -383,19 +421,68 @@
         });
     }
     
+    // 渲染學生名單
+    function renderStudentList(id){
+      getCourseIdFromeAxios(id);
+      axios.get('http://localhost:3000/courses/'+deleteCourseId).then(resp=>{
+        studListCourseName.textContent = resp.data.courseName;
+      });
 
+      Promise.all([axios.get('http://localhost:3000/courseOrders?courseId='+deleteCourseId),axios.get('http://localhost:3000/users')]).then(r=>{
+        let result  = []
+        r[0].data.forEach(e=>{
+          r[1].data.forEach(o=>{
+            if(e.userId == o.id){
+              result.push(o);
+            }
+          })
+        })
+        renderStudList(result);
+      })
+    }
+
+    // 渲染學生名單的方法
+    function renderStudList(ary) { 
+      let renderStudListTemp = '';      // 儲存渲染的HTML的變數
+      ary.forEach(o=>{
+        renderStudListTemp += `<tr class="py-1">
+                                <td><p class="mb-0 mt-2">${o.name}</p></td>
+                                <td><p class="mb-0 mt-2">${o.mail}</p></td>
+                                <td><p class="mb-0 mt-2">${o.phone}</p></td>
+                                <td>
+                                  <div class="btn-small">
+                                      <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" onclick="deleteStudInCourse(${o.id})">刪除課程</a>
+                                  </div>
+                                </td>
+                              </tr>`;
+      })
+      studListBody.innerHTML = renderStudListTemp;
+    }
+
+    // 刪除課程中的學生
+    function deleteStudInCourse(id){
+      console.log(id);
+      console.log(deleteCourseId);
+      axios.get('http://localhost:3000/courseOrders').then(resp=>{
+        resp.data.forEach(o=>{
+          if(o.userId == id && o.courseId == deleteCourseId){
+              axios.delete("http://localhost:3000/courseOrders/"+o.id).then(res=>{ 
+              console.log(res, 'patch')
+              location.href = 'admin-course.html';
+          });
+          }
+        })
+      })
+    }
+
+
+    
 
 
 </script>
             </div>
         </div>
       </div>
-     
-   
-
-   
-
-
     
     
 
@@ -404,29 +491,34 @@
 
     <!-- my js -->
     <script src="./assets/js/vendors.js"></script>
-    <script src="./assets/js/admin-all.js"></script>
+    <script type="javascript" src="./assets/js/admin-all.js"></script>
     
       <script>
           const pageCode = localStorage.getItem('pageCode');
-          const orderPage = document.getElementById('orderPage');
+          const memberPage = document.getElementById('memberPage');
           const coursePage = document.getElementById('coursePage');
           const ConsultationPage = document.getElementById('ConsultationPage');
           if(pageCode == 0){
-            orderPage.classList.remove('onPage');
+            memberPage.classList.remove('onPage');
             coursePage.classList.remove('onPage');
             ConsultationPage.classList.remove('onPage');
           } else if(pageCode == 1){
-            orderPage.classList.add('onPage');
+            memberPage.classList.add('onPage');
             coursePage.classList.remove('onPage');
             ConsultationPage.classList.remove('onPage');
           } else if(pageCode == 2){
-            orderPage.classList.remove('onPage');
+            memberPage.classList.remove('onPage');
             coursePage.classList.add('onPage');
             ConsultationPage.classList.remove('onPage');
           } else if(pageCode == 3){
-            orderPage.classList.remove('onPage');
+            memberPage.classList.remove('onPage');
             coursePage.classList.remove('onPage');
             ConsultationPage.classList.add('onPage');
+          }
+
+          function logout(){
+            location.href = 'index.html';
+            localStorage.removeItem('loginMember');
           }
       </script>
   </body>

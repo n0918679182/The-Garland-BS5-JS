@@ -117,12 +117,16 @@ var url = location.href;
 var articalNum = parseInt(url.substring(url.indexOf('=') + 1, url.length)); //取得網址參數並轉成數字
 
 axios.get('http://localhost:3000/courses').then(function (response) {
-  courseDetailRender(response.data); // courseTable(response.data);
+  // 渲染表單選項
+  axios.get('http://localhost:3000/courses').then(function (resp) {
+    resp.data.forEach(function (o) {
+      courseId.options.add(new Option(o.courseName, o.id - 1));
+    });
+    courseDetailRender(response.data);
+  });
 });
 axios.get("http://localhost:3000/courseOrders?courseId=".concat(articalNum + 1)).then(function (response) {
   var member = JSON.parse(localStorage.getItem('loginMember'));
-  console.log("member: " + member.id);
-  console.log(response.data);
   var courseStud = document.querySelector('.courseStud');
   courseStud.textContent = response.data.length;
 });
@@ -137,7 +141,7 @@ if (localStorage.getItem('loginMember') != null) {
   studName.value = member.name;
   studPhoneNum.value = member.phone;
   studMail.value = member.mail;
-} // 渲染頁面
+} // 渲染頁面的方法
 
 
 function courseDetailRender(aryData) {
@@ -151,9 +155,7 @@ function courseDetailRender(aryData) {
   var courseBeginDate = document.querySelector('.courseBeginDate');
   courseBeginDate.innerHTML = "\u958B\u8AB2\u65E5\u671F\uFF1A ".concat(aryData[articalNum].courseBeginDate);
   var coursePrice = document.querySelector('.coursePrice');
-  coursePrice.innerHTML = "NT$ ".concat(aryData[articalNum].coursePrice); // const courseStudNum = document.querySelector('.courseStudNum');
-  // courseStudNum.innerHTML = `已報名人數 ${aryData[articalNum].courseStud.length} / ${aryData[articalNum].courseMaximumStud}`;
-
+  coursePrice.innerHTML = "NT$ ".concat(aryData[articalNum].coursePrice);
   var courseLimit = document.querySelector('.courseLimit');
   courseLimit.textContent = aryData[articalNum].courseMaximumStud;
   var courseContent = document.querySelector('.courseContent');
@@ -162,25 +164,47 @@ function courseDetailRender(aryData) {
 
 
 courseTableBtn.addEventListener('click', function () {
-  if (member == null) {
-    alert('請先登入喔!');
-    location.href = 'login.html';
+  // 先判定是否有欄位未填
+  if (courseId.value == '' || studName.value == '' || studPhoneNum.value == '' || studMail.value == '') {
+    alert('表單輸入不完全');
   } else {
-    var obj = {};
-    obj.id = null;
-    obj.userId = member.id;
-    obj.courseId = articalNum + 1;
-    axios.post('http://localhost:3000/courseOrders', obj).then(function (resp) {
-      console.log("123" + resp.data);
-    });
-    alert('資料送出成功');
-  } // 清空表單
+    // 判斷是否有登入
+    if (member == null) {
+      alert('請先登入喔!');
+      location.href = 'login.html';
+    } else {
+      var obj = {};
+      obj.id = null;
+      obj.userId = member.id;
+      obj.courseId = parseInt(courseId.value) + 1; // 取得所有課程訂單
 
+      axios.get('http://localhost:3000/courseOrders?userId=' + member.id).then(function (resp) {
+        // 判斷該位學員是否已經報名過了
+        var alreadyHaveCourse = false;
+        resp.data.forEach(function (o) {
+          if (o.courseId == parseInt(courseId.value) + 1) {
+            alreadyHaveCourse = true;
+          }
+        }); // 如果已經報名過了
 
-  courseId.value = '';
-  studName.value = '';
-  studPhoneNum.value = '';
-  studMail.value = '';
+        if (alreadyHaveCourse) {
+          alert('課程已經報名過了喔~不要重複報名!');
+          courseId.value = '';
+          studName.value = '';
+          studPhoneNum.value = '';
+          studMail.value = '';
+        } else {
+          // 送出表單
+          axios.post('http://localhost:3000/courseOrders', obj).then(function (resp) {
+            console.log("123" + resp.data);
+          });
+          alert('資料送出成功');
+        }
+
+        location.href = 'course-list.html';
+      });
+    }
+  }
 });
 "use strict";
 "use strict";
