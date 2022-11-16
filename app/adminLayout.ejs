@@ -34,14 +34,14 @@
                 <a href="index.html"><img src="assets/images/Logo-big.png" alt="The Garland" style="width:140px;"></a>
                 <nav class="d-flex flex-column w-100" style=" margin-top:114px;">
                     <ul class="list-unstyled text-center sideMenu">
-                      <li class="mb-14" id="orderPage">
-                          <a href="#" class="text-dark h4">訂單查詢</a>
-                      </li>
                       <li class="mb-14" id="coursePage">
-                          <a href="#" class="text-dark h4">課程管理</a>
+                          <a href="admin-course.html" class="text-dark h4">課程管理</a>
+                      </li>
+                      <li class="mb-14" id="memberPage">
+                          <a href="admin-member.html" class="text-dark h4">會員資訊</a>
                       </li>
                       <li id="ConsultationPage">
-                          <a href="#" class="text-dark h4">諮詢回覆</a>
+                          <a href="#" class="text-dark h4" onclick="logout()">管理員登出</a>
                       </li>
                     </ul>
                 </nav>
@@ -52,12 +52,6 @@
             </div>
         </div>
       </div>
-     
-   
-
-   
-
-
     
     
 
@@ -66,29 +60,34 @@
 
     <!-- my js -->
     <script src="./assets/js/vendors.js"></script>
-    <script src="./assets/js/admin-all.js"></script>
+    <script type="javascript" src="./assets/js/admin-all.js"></script>
     
       <script>
           const pageCode = localStorage.getItem('pageCode');
-          const orderPage = document.getElementById('orderPage');
+          const memberPage = document.getElementById('memberPage');
           const coursePage = document.getElementById('coursePage');
           const ConsultationPage = document.getElementById('ConsultationPage');
           if(pageCode == 0){
-            orderPage.classList.remove('onPage');
+            memberPage.classList.remove('onPage');
             coursePage.classList.remove('onPage');
             ConsultationPage.classList.remove('onPage');
           } else if(pageCode == 1){
-            orderPage.classList.add('onPage');
+            memberPage.classList.add('onPage');
             coursePage.classList.remove('onPage');
             ConsultationPage.classList.remove('onPage');
           } else if(pageCode == 2){
-            orderPage.classList.remove('onPage');
+            memberPage.classList.remove('onPage');
             coursePage.classList.add('onPage');
             ConsultationPage.classList.remove('onPage');
           } else if(pageCode == 3){
-            orderPage.classList.remove('onPage');
+            memberPage.classList.remove('onPage');
             coursePage.classList.remove('onPage');
             ConsultationPage.classList.add('onPage');
+          }
+
+          function logout(){
+            location.href = 'index.html';
+            localStorage.removeItem('loginMember');
           }
       </script>
   </body>
