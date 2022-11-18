@@ -1,0 +1,52 @@
+---
+title: 會員資料
+layout: ./app/memberLayout.ejs
+engine: ejs
+current: index
+---
+<h2 class="text-dark mb-5 mb-lg-10">會員資料<span class="text-primary60 ms-2">Account</span></h2>
+<h3 class="h4 text-dark fw-bolder mb-4 mb-lg-8">帳號資料</h3>
+<div class="mb-10">
+    <label class="mb-4" for="memberAcc">帳號：</label>
+    <input type="text" class="form-control mb-4 mb-lg-7" id="memberAcc" readonly="true">
+
+    <label class="mb-4" for="memberPwd">密碼：</label>
+    <input type="password" class="form-control mb-4 mb-lg-7" id="memberPwd">
+
+    <label class="mb-4" for="checkMemberPwd">再次確認密碼：</label>
+    <input type="password" class="form-control mb-2" id="checkMemberPwd" onblur="checkMemberPassword()">
+    <p class="m-0 text-danger h6" id="checkMemberPwdErrMSG"></p>
+</div>
+
+
+
+<h3 class="h4 text-dark fw-bolder mb-4 mb-lg-8">基本資料</h3>
+<div>
+    <label class="mb-4" for="memberName">姓名：</label>
+    <input type="text" class="form-control mb-4 mb-lg-7" id="memberName">
+
+    <label class="mb-4" for="memberMail">Email：</label>
+    <input type="email" class="form-control mb-2" id="memberMail" onblur="chenkMemberMail()">
+    <p class="m-0 text-danger h6 mb-4 mb-lg-7" id="sameMemberMailErrMSG"></p>
+
+    <label class="mb-4" for="memberPhone">連絡電話：</label>
+    <input type="text" class="form-control mb-4 mb-lg-7" id="memberPhone">
+
+    <label class="mb-4" for="memberAddress">地址：</label>
+    <input type="text" class="form-control mb-4 mb-lg-7" id="memberAddress">
+</div>                   
+
+<div class="w-100 d-flex justify-content-center">
+    <div class="btn-big">
+        <a class="w-100" role="button" id="updateMemberDetailBT">更新</a>
+    </div>
+</div>
+<!-- swipper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<!-- my js -->
+<script src="./assets/js/vendors.js"></script>
+<script src="./assets/js/all.js"></script>
+<script>
+    memberAccountInit();
+</script>

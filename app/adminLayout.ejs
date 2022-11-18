@@ -60,36 +60,11 @@
 
     <!-- my js -->
     <script src="./assets/js/vendors.js"></script>
-    <script type="javascript" src="./assets/js/admin-all.js"></script>
+    <script src="./assets/js/all.js"></script>
     
-      <script>
-          const pageCode = localStorage.getItem('pageCode');
-          const memberPage = document.getElementById('memberPage');
-          const coursePage = document.getElementById('coursePage');
-          const ConsultationPage = document.getElementById('ConsultationPage');
-          if(pageCode == 0){
-            memberPage.classList.remove('onPage');
-            coursePage.classList.remove('onPage');
-            ConsultationPage.classList.remove('onPage');
-          } else if(pageCode == 1){
-            memberPage.classList.add('onPage');
-            coursePage.classList.remove('onPage');
-            ConsultationPage.classList.remove('onPage');
-          } else if(pageCode == 2){
-            memberPage.classList.remove('onPage');
-            coursePage.classList.add('onPage');
-            ConsultationPage.classList.remove('onPage');
-          } else if(pageCode == 3){
-            memberPage.classList.remove('onPage');
-            coursePage.classList.remove('onPage');
-            ConsultationPage.classList.add('onPage');
-          }
-
-          function logout(){
-            location.href = 'index.html';
-            localStorage.removeItem('loginMember');
-          }
-      </script>
+    <script>
+        adminLayoutInit();        
+    </script>
   </body>
   
 
