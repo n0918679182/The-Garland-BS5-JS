@@ -71,8 +71,17 @@
 
     <div class="container mt130 mb-tofooter">
         <div class="row ">
-            <div class="col-12 d-lg-none mb-2">
-
+            <div class="col-12 d-lg-none">
+               <!-- Swiper -->
+                <div class="swiper memberNavSwiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide"><a href="memberAccount.html#" class="text-dark h6" id="toMemberAccountSm">會員資料</a></div>
+                    <div class="swiper-slide"><a href="memberCourse.html" class="text-dark h6" id="toMemberCourseSm">我的課程</a></div>
+                    <div class="swiper-slide"><a href="#" class="text-dark h6" id="toMemberOrderSm">訂單紀錄</a></div>
+                    <div class="swiper-slide"><a href="#" class="text-dark h6" id="toMeberConsulationSm">諮詢紀錄</a></div>
+                    <div class="swiper-slide"><a href="#" class="text-dark h6" onclick="logout()" id="memberLogoutSm">會員登出</a></div>
+                  </div>
+                </div>
             </div>
             <div class="col-3 pt-15 d-none d-lg-block">
                 <ul class="d-flex flex-column list-unstyled align-items-center sideMenu">
@@ -82,17 +91,20 @@
                     <li class="mb-14" id="toMemberCourse">
                         <a href="memberCourse.html" class="text-dark h4">課程管理</a>
                     </li>
+                    <li class="mb-14" id="">
+                        <a href="#" class="text-dark h4">訂單紀錄</a>
+                    </li>
+                    <li class="mb-14" id="">
+                      <a href="#" class="text-dark h4">諮詢紀錄</a>
+                  </li>
                     <li class="mb-14">
                         <a href="#" class="text-dark h4" onclick="logout()">登出</a>
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 mt-5">
                 
-<div class="px-4">
-    <h2 class="text-dark mb-5 mb-lg-10">我的課程<span class="text-primary60 ms-2">Courses</span></h2>
-</div>
-
+<h2 class="text-dark mb-5 mb-lg-10">我的課程<span class="text-primary60 ms-2">Courses</span></h2>
 
 
 
@@ -168,23 +180,10 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
     <!-- my js -->
-    <!-- <script src="./assets/js/vendors.js"></script> -->
     <script src="./assets/js/all.js"></script>
     <script>
         layoutInit();
         memberLayoutInit();
-
-    //     const memberNavMenu =  document.querySelector('#member-nav-menu');
-    // const memberNavBurger = document.querySelector('#member-nav-burger');
-    // const memberNavClose = document.querySelector('#member-nav-burger-close');
-    // const memberNavCover = document.querySelector('#member-nav-cover');
-    
-    // memberNavMenu.addEventListener('click',function(){
-    //   memberNavBurger.classList.toggle('d-none');
-    //   memberNavClose.classList.toggle('d-none');
-    //   memberNavCover.classList.toggle('h-100');
-    //   memberNavCover.classList.toggle('op20');
-    // });
     </script>
 
   </body>
