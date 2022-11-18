@@ -82,7 +82,7 @@
     },
     {
       "id": 9,
-      "name": "Wang",
+      "name": "王大旗",
       "account": "h123",
       "password": "h456",
       "mail": "h123@gmail.com",
@@ -154,7 +154,7 @@
       "courseImage": "course03.jpg",
       "courseSimpleIntro": "第三門課的課程簡介<br />大家加油好嗎?",
       "courseContent": "第三門課的課程介紹<br />大家加油好嗎?<br />",
-      "courseGuildline": "第三門課的課程日程<br />大家加油好嗎?",
+      "courseGuildline": "11 / 18 - 永生花入門<br /><br />11 / 25 - 花藝成品教學： 永生乾燥盆花<br /><br />12 / 1 - 花藝成品教學： 玫瑰永生花束<br /><br />12 / 8 - 花藝成品教學：永生禮盒花",
       "coursePrice": "1200"
     }
   ],
@@ -190,14 +190,14 @@
       "courseId": 3
     },
     {
-      "id": 8,
-      "userId": 9,
-      "courseId": 3
-    },
-    {
       "id": 9,
       "userId": 9,
       "courseId": 1
+    },
+    {
+      "id": 10,
+      "userId": 9,
+      "courseId": 2
     }
   ],
   "blogArticles": [

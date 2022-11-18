@@ -637,6 +637,42 @@ function checkMemberPassword() {
 function memberCourseInit() {
   // 控制左側選單 選中時的效果
   localStorage.setItem("memberPageCode", 2);
+  var memberCourseListArea = document.getElementById('memberCourseListArea'); // 渲染會員課程的區塊
+
+  var memberCourseName = document.getElementById('memberCourseName');
+  var memberCourseGuildLine = document.getElementById('memberCourseGuildLine');
+  var memberCourseBeginDate = document.getElementById('memberCourseBeginDate');
+  var memberCourseTime = document.getElementById('memberCourseTime');
+  var memberCoursePlace = document.getElementById('memberCoursePlace');
+  var memberCourseTeacher = document.getElementById('memberCourseTeacher');
+  var loginMember = JSON.parse(localStorage.getItem('loginMember'));
+  Promise.all([axios.get('http://localhost:3000/courseOrders?userId=' + loginMember.id), axios.get('http://localhost:3000/courses')]).then(function (resp) {
+    var memberCourseAry = resp[0].data;
+    var courseAry = resp[1].data;
+    console.log(memberCourseAry);
+    console.log(courseAry);
+    renderMemberCourse(memberCourseAry, courseAry);
+  });
+}
+
+function renderMemberCourse(memberCourseAry, courseAry) {
+  var renderMemberCourseTemp = '';
+  memberCourseAry.forEach(function (mc) {
+    renderMemberCourseTemp += "\n        <li class=\"col-lg-6 mb-10\">\n            <div class=\"border border-primary80 border-2 py-10 px-6 radious8 memberCourseItemBG\">\n                <h3 class=\"h5 fw-bolder text-dark text-center mb-10\" id=\"memberCourseName\">".concat(courseAry.filter(function (o) {
+      return o.id == mc.courseId;
+    })[0].courseName, "</h3>\n                <p class=\"mb-10 text-dark\" id=\"memberCourseGuildLine\">").concat(courseAry.filter(function (o) {
+      return o.id == mc.courseId;
+    })[0].courseGuildline, "</p>\n                <p class=\"mb-3 text-dark\" id=\"memberCourseBeginDate\">\u958B\u8AB2\u65E5\u671F\uFF1A").concat(courseAry.filter(function (o) {
+      return o.id == mc.courseId;
+    })[0].courseBeginDate, "</p>\n                <p class=\"mb-3 text-dark\" id=\"memberCourseTime\">\u4E0A\u8AB2\u6642\u9593\uFF1A").concat(courseAry.filter(function (o) {
+      return o.id == mc.courseId;
+    })[0].courseTime, "</p>\n                <p class=\"mb-3 text-dark\" id=\"memberCoursePlace\">\u4F7F\u7528\u6559\u5BA4\uFF1A").concat(courseAry.filter(function (o) {
+      return o.id == mc.courseId;
+    })[0].coursePlace, "</p>\n                <p class=\"mb-3 text-dark\" id=\"memberCourseTeacher\">\u8B1B\u5E2B\uFF1A").concat(courseAry.filter(function (o) {
+      return o.id == mc.courseId;
+    })[0].courseTeacher, "</p>\n            </div>\n        </li>");
+  });
+  memberCourseListArea.innerHTML = renderMemberCourseTemp;
 }
 "use strict";
 
