@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>The Garland - 花藝課程</title>
+    <title>Boostrap Index</title>
 
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,100 +69,69 @@
     </nav>
     <div class="cover" id="nav-cover"></div>
 
-    
-<div class="container mt130 mb-tofooter ps-lg-10 pt-2">
-
-    <div class="row justify-content-center course-detail course-detail-content">
-
-        <div class="col-11 col-lg-10 mb-4 mb-lg-9">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="course-list.html">花藝課程</a></li>
-                    <li class="breadcrumb-item active title-js" aria-current="page">789</li>
-                </ol>
-            </nav>
-        </div>
-
-        <div class="col-11 col-lg-5 mb-8 mb-lg-10">
-            <h3 class="text-dark fw-bold mb-4 mb-xl-10 ls-2helf d-lg-none mb-8 title-js">123</h3>
-            <div class="courseList-img imgOutline-odd w-100 radious8 shadow"
-                style="background-image: url('assets/images/course01.jpg');"></div>
-        </div>
-
-        <div class="col-11 col-lg-5 mb-10 mb-lg-20 align-items-center">
-            <div class="px-1">
-                <h3 class="text-dark fw-bold mb-4 mb-xl-10 ls-2helf d-none d-lg-block title-js">456</h3>
-                <p class="text-dark h5 mb-3 mb-xl-6 courseBeginDate">開課日期：</p>
-                <p class="text-dark h5 mb-3 mb-xl-6 coursePrice">NT$</p>
-                <p class="text-dark h5 mb-5 mb-xl-7">已報名人數 <span class="courseStud"></span> / <span class="courseLimit"></span></p>
-                <div class="btn-big">
-                    <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#">我要報名</a>
+    <div class="signUpBG py-5">
+    <div class="container mt130 mb-tofooter">
+        <div class="row ">
+            <div class="col-12 mb-5 mb-lg-10">
+                <div class="px-4">
+                    <h2 class="text-dark mb-5 mb-lg-10">會員註冊<span class="text-primary60 ms-2">Sign Up</span></h2>
                 </div>
             </div>
-        </div>
-
-        <div class="col-11 col-lg-10">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <div class="nav-link active courseIntroOutline text-center" style="width: 175px;" id="intro-tab"
-                        data-bs-toggle="tab" data-bs-target="#intro" type="button" role="tab" aria-controls="intro"
-                        aria-selected="true">課程介紹</div>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <div class="nav-link text-center" style="width: 175px;" id="courseTable-tab" data-bs-toggle="tab"
-                        data-bs-target="#courseTable" type="button" role="tab" aria-controls="courseTable"
-                        aria-selected="false">報名表單</div>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <!-- 課程介紹 -->
-                <div class="tab-pane fade show active px-3 pt-4 px-lg-7 pt-lg-12" id="intro" role="tabpanel"
-                    aria-labelledby="intro-tab">
-                    <p class="courseContent">課程大綱<br />
-                       
-                    </p>
-                </div>
-                <!-- 報名表單 -->
-                <div class="tab-pane fade px-3 pt-4 px-lg-7 pt-lg-12" id="courseTable" role="tabpanel"
-                    aria-labelledby="courseTable-tab">
-
-                    <label class="mb-4" for="courseId">請選擇課程：</label>
-                    <select class="form-select mb-4 mb-lg-7" aria-label="Default select example" name="courseId" id="courseId">
-                    </select>
-
-
-                    <label class="mb-4" for="studName">請輸入姓名：</label>
-                    <input type="text" class="form-control mb-4 mb-lg-7" id="studName">
-
-                    <label class="mb-4" for="studPhoneNum">請輸入連絡電話：</label>
-                    <input type="text" class="form-control mb-4 mb-lg-7" id="studPhoneNum">
-
-                    <label class="mb-4" for="studMail">請輸入Email：</label>
-                    <input type="email" class="form-control mb-4 mb-lg-7" id="studMail">
-
+            <div class="col-lg-8">
+                <div class="px-5">
+                    <h3 class="h4 text-dark fw-bolder mb-4 mb-lg-8">帳號資料</h3>
+                    <div class="ps-lg-10 mb-10">
+                        <label class="mb-4" for="singUpAccount">請輸入帳號：</label>
+                        <input type="text" class="form-control mb-2" id="singUpAccount" onblur="checkAccount()">
+                        <p class="m-0 text-danger h6 mb-4 mb-lg-7" id="sameAccountErrMSG"></p>
+        
+                        <label class="mb-4" for="singUpPwd">請輸入密碼：</label>
+                        <input type="password" class="form-control mb-4 mb-lg-7" id="singUpPwd">
+        
+                        <label class="mb-4" for="checkPwd">再次確認密碼：</label>
+                        <input type="password" class="form-control mb-2" id="checkPwd" onblur="checkPassword()">
+                        <p class="m-0 text-danger h6" id="checkPwdErrMSG"></p>
+                    </div>
+    
+                   
+    
+                    <h3 class="h4 text-dark fw-bolder mb-4 mb-lg-8">基本資料</h3>
+                    <div class="ps-lg-10">
+                        <label class="mb-4" for="singUpName">請輸入姓名：</label>
+                        <input type="text" class="form-control mb-4 mb-lg-7" id="singUpName">
+        
+                        <label class="mb-4" for="signUpMail">請輸入Email：</label>
+                        <input type="email" class="form-control mb-2" id="signUpMail" onblur="chenkMail()">
+                        <p class="m-0 text-danger h6 mb-4 mb-lg-7" id="sameMailErrMSG"></p>
+        
+                        <label class="mb-4" for="signUpPhone">請輸入連絡電話：</label>
+                        <input type="text" class="form-control mb-4 mb-lg-7" id="signUpPhone">
+        
+                        <label class="mb-4" for="signUpAddress">請輸入地址：</label>
+                        <input type="text" class="form-control mb-4 mb-lg-7" id="signUpAddress">
+                    </div>                   
+    
                     <div class="w-100 d-flex justify-content-center">
                         <div class="btn-big">
-                            <a class="w-100" role="button" id="courseTableBtn">送出</a>
+                            <a class="w-100" role="button" id="SignUpBT">註冊</a>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-
+    
     </div>
 </div>
 
-
-
-<!-- swiper -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> -->
+<!-- swipper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
 <!-- my js -->
-<!-- <script src="./assets/js/vendors.js"></script> -->
+<script src="./assets/js/vendors.js"></script>
 <script src="./assets/js/all.js"></script>
 <script>
-  courseDetailInit();
+    signUpInit();
 </script>
 
     <footer class="footer">

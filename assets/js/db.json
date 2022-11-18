@@ -7,7 +7,7 @@
       "password": "nnnn456",
       "mail": "nnnn123@gmail.com",
       "phone": "0912345678",
-      "address": "台北市士林區天母西路19號",
+      "address": "台北市士林區天母西路3號",
       "permission": "administrator"
     },
     {
@@ -99,6 +99,16 @@
       "phone": "0912345678",
       "address": "台東縣長濱鄉忠勇村25-1號",
       "permission": "commenUser"
+    },
+    {
+      "id": 11,
+      "name": "曾大華",
+      "account": "j123",
+      "password": "j456",
+      "mail": "j123@gmail.com",
+      "phone": "0908777666",
+      "address": "苗栗縣苗栗市民族路70-1號",
+      "permission": "commenUser"
     }
   ],
   "courses": [
@@ -109,13 +119,13 @@
       "courseTime": "19:00~21:00",
       "coursePlace": "B02",
       "courseTeacher": "Andy Wu",
-      "courseMaximumStud": 15,
+      "courseMaximumStud": "15",
       "courseState": "已開課",
       "courseImage": "course01.jpg",
       "courseSimpleIntro": "你也喜歡花，但卻不知如何入門嗎？<br />The Garland 帶你輕鬆踏入花藝的世界，體驗不一樣的生活樂趣！",
       "courseContent": "課程大綱<br /><br />第 1 堂 - 基本技法<br /><br />工欲善其事，必先利其器。在開始製作花藝作品前，先了解有哪些會應用到的工具，以及常見的花藝技法，事前準備好，才不會打亂製作時的興致。<br /><br /><br />第 2 堂 - 花藝成品教學： 花漾小盆花<br /><br />花藝最入門的作品之一，精緻可愛的花漾小盆花，可以擺放在書桌或客廳桌上，輕巧點綴單調的桌面喔！<br /><br /><br />第 3 堂 - 花藝成品教學： 花漾珠寶盒<br /><br />花漾珠寶盒同時兼具美觀與實用性，放在化妝台上，可以展現出高貴的氣質，另有小抽屜，放置各式裝飾品。<br /><br /><br />第 4 堂 - 花藝成品教學：花相框<br /><br />讓富有紀念意義的相框，保存著花朵最動人的時刻，隨時都能觀賞到美麗的畫面。<br /><br /><br /><br />一期四堂課，每堂2小時<br />每週皆有開課<br />停課會另行告知，需三天前預約報名上課<br /><br /><br />– 含花材、提袋一個<br />– 作品高約 20 公分寬約 25 公分，共 1 盆<br />– 課程時間約 2 小時<br /><br /><br /><br />【注意事項】<br /><br />▸工作室空間有限，且課程內容有智慧財產權，為保障講師與學員權益，無法攜伴與旁聽，請見諒。<br /><br />▸課程費用含花材/師資/提袋<br /><br />▸若有花材/花器缺貨或品質不佳，會依狀況適時調整更換花材/花器。<br /><br />▸若臨時有事，課程可轉讓他人，或到工作室領取成品(請於一周前通知，因花材已預留故無法退費)",
       "courseGuildline": "10 / 18 - 基本技法<br /><br />10 / 25 - 花藝成品教學： 花漾小盆花<br /><br />11 / 1 - 花藝成品教學： 花漾珠寶盒<br /><br />11 / 8 - 花藝成品教學：花相框",
-      "coursePrice": 2280
+      "coursePrice": "2280"
     },
     {
       "id": 2,
@@ -166,8 +176,28 @@
     },
     {
       "id": 5,
-      "userId": 8,
+      "userId": 7,
       "courseId": 2
+    },
+    {
+      "id": 6,
+      "userId": 7,
+      "courseId": 1
+    },
+    {
+      "id": 7,
+      "userId": 7,
+      "courseId": 3
+    },
+    {
+      "id": 8,
+      "userId": 9,
+      "courseId": 3
+    },
+    {
+      "id": 9,
+      "userId": 9,
+      "courseId": 1
     }
   ],
   "blogArticles": [

@@ -18070,6 +18070,12 @@ footer .scale01:hover {
   }
 }
 
+@media (min-width: 992px) {
+  .signUpBG {
+    background: url("../images/signUpBG.png") center right no-repeat;
+  }
+}
+
 .modal-dialog {
   max-width: 1000px !important;
 }

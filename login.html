@@ -61,7 +61,7 @@
 
             <li class="nav-item btn-big mt-4 mt-lg-0 w-100">
               <a class="nav-link w-100 navLoginBT" href="login.html">登入 </a>
-              <a class="nav-link w-100 navMemberMenuBT d-none logout" href="#">歡迎</a>
+              <a class="nav-link w-100 navMemberMenuBT d-none logout" href="memberAccount.html">歡迎</a>
             </li>
           </ul>
         </div>
@@ -77,7 +77,7 @@
                 style="background-image: url('assets/images/login.jpg');"></div>
         </div>
         <div class="col-lg-6 col-xl-5 ps-lg-10">
-            <h2 class="text-dark mb-5 mb-lg-10">登入<span class="text-primary60">Sign In</span></h2>
+            <h2 class="text-dark mb-5 mb-lg-10">登入<span class="text-primary60 ms-2">Sign In</span></h2>
             <div class="d-flex flex-column">
                 <label class="text-dark h6 fsz-lg-20 mb-3 mb-lg-4" for="account">請輸入帳號</label>
                 <input class="border-0 border-bottom mb-5 mb-lg-6" type="text" id="account" />
@@ -89,7 +89,7 @@
                     <a class="w-100 d-flex justify-content-lg-center" id="loginBT" href="#">登入</a>
                 </div>
                 <div class="btn-big">
-                    <a class="w-100 d-flex justify-content-lg-center" href="#">註冊</a>
+                    <a class="w-100 d-flex justify-content-lg-center" href="signUp.html">註冊</a>
                 </div>
             </div>
             <p class="m-0">註冊即代表你同意 <a href="#">《用戶協議》</a> 和 <a href="#">《隱私協議》</a></p>
@@ -100,49 +100,9 @@
 
 
 
-
+<script src="./assets/js/all.js"></script>
 <script>
-   
-    const account = document.getElementById("account");
-    const password = document.getElementById("password");
-    const loginBT = document.getElementById("loginBT");
-
-
-    axios.get('http://localhost:3000/users').then(function (response) {
-
-        console.log(response.data);
-        validAccount(response.data);
-    });
-
-    function validAccount(aryData) {
-        loginBT.addEventListener("click", function () {
-            console.log(account.value)
-            console.log(password.value)
-            let wrongInput = true;
-            aryData.forEach(o=>{
-                if(account.value == o.account){
-                    if(password.value == o.password){
-                        wrongInput = false;
-                        localStorage.setItem('loginMember',JSON.stringify(o));
-                    }
-                }
-            });
-            if(wrongInput){
-                alert("您輸入的帳號或密碼有誤!");
-                account.value = "";
-                password.value = "";
-            }else{
-                const member = JSON.parse(localStorage.getItem('loginMember'));
-                alert("歡迎 "+member.name+" 登入!");
-                location.href = "index.html";
-
-            }
-            
-        })
-    }
-   
-
-
+   loginInit();
 </script>
 
     <footer class="footer">
@@ -205,9 +165,11 @@
     <script type="javascript" src="assets/js/blog-artical.js"></script>
     <!-- <script type="javascript" src="assets/js/course-list.js"></script> -->
     <script type="javascript" src="assets/js/course-detail.js"></script>
-
+    <script>
+      layoutInit();
+    </script>
   </body>
   
-
+  
 </html>
 
