@@ -727,6 +727,141 @@ function logout() {
 }
 "use strict";
 
+function productInit() {
+  // 渲染表單
+  axios.get('http://localhost:3000/products').then(function (resp) {
+    renderProductFlowerList(resp.data);
+    renderProductVaseList(resp.data);
+  });
+} // 渲染花卉的方法
+
+
+function renderProductFlowerList(dataAry) {
+  var productFlowerRenderArea = document.getElementById('productFlowerRenderArea');
+  var tempStr = '';
+  dataAry.filter(function (o) {
+    return o.type == "flower";
+  }).forEach(function (o) {
+    tempStr += "\n        <li class=\"col-6 col-md-4 col-lg-3 col-xl-2 mb-5 diy".concat(o.id, "-li\">\n            <label class=\"text-center w-100\" for=\"diy").concat(o.id, "\">\n                <div class=\"border border-primary80 w-100 p-1 mb-5 radious20 itemImage imgHover\" >\n                    <div class=\"productItem\" style=\"background-image: url('assets/images/diy/").concat(o.imgName, "');\">\n\n                    </div>\n                </div>\n                \n                <h3 class=\"h5 text-dark\">").concat(o.name, "</h3>\n                \n            </label>\n            <input type=\"checkbox\" name=\"flower\" id=\"diy").concat(o.id, "\" value=\"").concat(o.name, "\" data-price=\"").concat(o.price, "\" onclick=\"chedkedItem(").concat(o.id, ")\" class=\"d-none\">\n        </li>\n        ");
+  });
+  productFlowerRenderArea.innerHTML = tempStr;
+} // 給已選取的選項加上css效果
+// 花卉
+
+
+function chedkedItem(id) {
+  var itemImage = document.querySelector('.diy' + id + '-li > label > .itemImage');
+  itemImage.classList.toggle('productItemBorder');
+  itemImage.classList.toggle('imgHover');
+} // 花瓶
+
+
+function checkedVase(id) {
+  var thisVaseImage = document.querySelector('.diy' + id + '-li > label > .vaseImage'); // 當前點擊的容器圖片
+
+  var allVaseImage = document.querySelectorAll('.vaseImage'); // 所有容器圖片
+
+  var allVaseInput = document.querySelectorAll('input[name=vase]'); // 所有容器input
+  // 先拿掉所有的選中效果
+
+  allVaseImage.forEach(function (o) {
+    o.classList.remove('productItemBorder');
+    o.classList.add('imgHover');
+  }); // 逐個判斷若是選中則加上效果
+
+  allVaseInput.forEach(function (o) {
+    if (o.checked) {
+      thisVaseImage.classList.add('productItemBorder');
+      thisVaseImage.classList.remove('imgHover');
+    }
+  });
+} // 渲染花瓶包裝的方法
+
+
+function renderProductVaseList(dataAry) {
+  var productVaseRenderArea = document.getElementById('productVaseRenderArea');
+  var tempStr = '';
+  dataAry.filter(function (o) {
+    return o.type == "decorate";
+  }).forEach(function (o) {
+    tempStr += "\n        <li class=\"col-6 col-md-4 col-lg-3 col-xl-2 mb-5 diy".concat(o.id, "-li\">\n            <label class=\"text-center w-100\" for=\"diy").concat(o.id, "\">\n                <div class=\"border border-primary80 w-100 p-1 mb-5 radious20 vaseImage imgHover\">\n                    <div class=\"productItem\" style=\"background-image: url('assets/images/diy/").concat(o.imgName, "');\">\n\n                    </div>\n                </div>\n                \n                <h3 class=\"h5 text-dark\">").concat(o.name, "</h3>\n                \n            </label>\n            <input type=\"radio\" name=\"vase\" id=\"diy").concat(o.id, "\" value=\"").concat(o.name, "\" data-price=\"").concat(o.price, "\" onclick=\"checkedVase(").concat(o.id, ")\" class=\"d-none\">\n        </li>\n        ");
+  });
+  productVaseRenderArea.innerHTML = tempStr;
+} // 送出訂單 + 表單驗證
+
+
+function sendProductOrder() {
+  var flowers = document.querySelectorAll('input[name="flower"]');
+  var vases = document.querySelectorAll('input[name = "vase"]');
+  var orderName = document.getElementById('orderName');
+  var orderPhoneNum = document.getElementById('orderPhoneNum');
+  var orderMail = document.getElementById('orderMail');
+  var orderAddress = document.getElementById('orderAddress');
+  var loginMember = JSON.parse(localStorage.getItem("loginMember"));
+  var vaseName = '';
+  var serialNumTemp = '';
+  var orderDate = new Date();
+  var order = {
+    "flowers": []
+  };
+  flowers.forEach(function (o) {
+    if (o.checked) {
+      var flower = {};
+      flower.name = o.value;
+      flower.price = o.dataset.price;
+      order.flowers.push(flower);
+    }
+  });
+  vases.forEach(function (o) {
+    if (o.checked) {
+      var vase = {};
+      vase.name = o.value;
+      vase.price = o.dataset.price;
+      order.vases = vase;
+      vaseName = o.value;
+    }
+  });
+  order.name = orderName.value;
+  order.phone = orderPhoneNum.value;
+  order.mail = orderMail.value;
+  order.address = orderAddress.value;
+  order.usersId = loginMember.id;
+  order.orderDate = orderDate;
+  order.state = 1; // 1:訂單處理中 2:包裹配送中 3:包裹已送達 4:買家完成取貨付款
+
+  serialNumTemp += orderDate.getFullYear() + '' + (orderDate.getMonth() + 1) + orderDate.getDate() + createSerialNum();
+  order.serialNum = serialNumTemp; // console.log(order);
+
+  if (order.flowers.length == 0) {
+    alert('請選擇想使用的花卉');
+    location.href = 'product.html#';
+  } else if (vaseName == '') {
+    alert('請選擇想使用的容器或裝飾');
+    location.href = 'product.html#';
+  } else if (orderName.value == '' || orderPhoneNum.value == '' || orderMail.value == '' || orderAddress.value == '') {
+    alert('表單填寫不完全');
+  } else {
+    axios.post('http://localhost:3000/flowerOrders', order).then(function (resp) {
+      alert('訂單已送出');
+      location.href = 'product.html';
+    })["catch"](function (resp) {
+      alert('訂單送出失敗');
+    });
+  }
+} // 新增流水號
+
+
+function createSerialNum() {
+  var serialNum = '';
+
+  for (var i = 0; i < 5; i++) {
+    serialNum += Math.floor(Math.random() * 10);
+  }
+
+  return serialNum;
+}
+"use strict";
+
 // 頁面初始化
 function signUpInit() {
   var singUpAccount = document.getElementById('singUpAccount');

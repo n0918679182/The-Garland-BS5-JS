@@ -17353,6 +17353,12 @@ button, button:focus {
 }
 
 @media (min-width: 992px) {
+  .fsz-lg-36 {
+    font-size: 36px;
+  }
+}
+
+@media (min-width: 992px) {
   .fsz-lg-28 {
     font-size: 28px;
   }
@@ -17392,6 +17398,18 @@ button, button:focus {
 
 .ls-2helf {
   letter-spacing: 2.5px;
+}
+
+@media (min-width: 768px) {
+  .w-lg-75 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .w-lg-75 {
+    width: 75%;
+  }
 }
 
 .btn-big {
@@ -18112,6 +18130,58 @@ footer .scale01:hover {
 
 .adminMemberModal.op0 {
   opacity: 0;
+}
+
+.productItemBorder {
+  border: 1px solid white !important;
+  position: relative;
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.productItemBorder::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  border: 3px solid #E33430;
+  -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+          transform: scale(0.9);
+  cursor: pointer;
+}
+
+.productItemBorder .productItem {
+  opacity: 1;
+}
+
+.productItem {
+  width: 100% !important;
+  height: 131px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.imgHover {
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+}
+
+.imgHover:hover {
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 /*# sourceMappingURL=all.css.map */

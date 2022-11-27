@@ -198,6 +198,16 @@
       "id": 10,
       "userId": 9,
       "courseId": 2
+    },
+    {
+      "id": 11,
+      "userId": 1,
+      "courseId": 1
+    },
+    {
+      "id": 12,
+      "userId": 6,
+      "courseId": 3
     }
   ],
   "blogArticles": [
@@ -277,5 +287,120 @@
       "contentTwo": "",
       "articalFrom": ""
     }
-  ]
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "蝴蝶蘭",
+      "price": 200,
+      "imgName": "diy01.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 2,
+      "name": "銀芽柳",
+      "price": 250,
+      "imgName": "diy02.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 3,
+      "name": "風信子",
+      "price": 230,
+      "imgName": "diy03.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 4,
+      "name": "滿天星",
+      "price": 180,
+      "imgName": "diy05.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 5,
+      "name": "金魚草",
+      "price": 300,
+      "imgName": "diy04.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 6,
+      "name": "唐菖蒲",
+      "price": 250,
+      "imgName": "diy06.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 7,
+      "name": "玫瑰",
+      "price": 290,
+      "imgName": "diy07.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 8,
+      "name": "牡丹",
+      "price": 240,
+      "imgName": "diy08.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 9,
+      "name": "非洲菊",
+      "price": 150,
+      "imgName": "diy09.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 10,
+      "name": "山茶花",
+      "price": 230,
+      "imgName": "diy10.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 11,
+      "name": "繡球花",
+      "price": 300,
+      "imgName": "diy11.jpg",
+      "type": "flower"
+    },
+    {
+      "id": 12,
+      "name": "花束",
+      "price": 100,
+      "imgName": "diy12.jpg",
+      "type": "decorate"
+    },
+    {
+      "id": 13,
+      "name": "花圈",
+      "price": 100,
+      "imgName": "diy13.jpg",
+      "type": "decorate"
+    },
+    {
+      "id": 14,
+      "name": "花瓶",
+      "price": 300,
+      "imgName": "diy14.jpg",
+      "type": "decorate"
+    },
+    {
+      "id": 15,
+      "name": "花藝包裝",
+      "price": 200,
+      "imgName": "diy15.jpg",
+      "type": "decorate"
+    },
+    {
+      "id": 16,
+      "name": "捧花",
+      "price": 150,
+      "imgName": "diy16.jpg",
+      "type": "decorate"
+    }
+  ],
+  "flowerOrders": []
 }
