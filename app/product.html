@@ -1,0 +1,96 @@
+---
+title: The Garland - 花藝課程
+layout: ./app/layout.ejs
+engine: ejs
+current: index
+---
+
+<div class="container  mt130 mb-tofooter ps-lg-10">
+    <div class="d-flex flex-column align-items-center align-items-lg-start mb-11 mb-lg-8">
+        <h2 class="h5 fsz-lg-28 text-dark fw-bolder lh-1">客製花藝</h2>
+        <div class="content-title-underline mb-1"></div>
+        <span class="h7 fsz-lg-16 text-primary60">Customization</span>
+    </div>
+    <div class="text-dark">
+        <p class="mb-5 h5">
+            最精心的客製化服務，不論是情人節浪漫花束，或是溫馨的聖誕花圈，都能滿足您的需求
+        </p>
+        <p class="mb-5">丨注意事項丨</p>
+        <p class="m-4 ">
+            花市偶爾會有花材缺貨或品質不佳的情形，若我們發現有這樣的情事發生，<br class="d-none d-lg-block">
+            請同意讓我們專業的花藝設計師以等值以上的新鮮花材為您做設計調整。
+        </p>
+        <p class="m-4 ">
+            因花材有季節性，恕無法完全如圖片中一樣出貨，能接受再下單。<br class="d-none d-lg-block">
+            所有訂單需以門市人員回覆為主，若無回覆，則訂單不成立。
+        </p>
+        <p class="m-4 ">
+            如遇特殊節日（如：農曆春節、情人節、母親節…等），因訂單量大，請提前7天訂購，<br class="d-none d-lg-block">
+            並且恕無法指定送達時段，請見諒。
+        </p>
+    </div>
+    <hr class=" border border-primary60 my-5 my-lg-10">
+    <h2 class="h5 fsz-lg-36 text-dark fw-bold text-center mb-8 mb-lg-12" id="step1">Step 1. 請選擇想要的花卉</h2>
+    <ul class="row list-unstyled" id="productFlowerRenderArea">
+        <!-- <li class="col-6 col-md-4 col-lg-3 col-xl-2 diy1-li">
+            <label class="text-center w-100" for="diy1">
+                <div class="border border-primary80 w-100 p-1 mb-5 radious20" id="itemImage">
+                    <div class="productItem" style="background-image: url('assets/images/diy/diy01.jpg');">
+
+                    </div>
+                </div>
+                
+                <h3 class="h5 text-dark">蝴蝶蘭</h3>
+                
+            </label>
+            <input type="checkbox" name="flower" id="diy1" value="銀芽柳" onclick="chedkedItem()" class="">
+        </li> -->
+
+    </ul>
+    <hr class=" border border-primary60 my-5 my-lg-10">
+    <h2 class="h5 fsz-lg-36 text-dark fw-bold text-center mb-8 mb-lg-12" id="step2">Step 2. 請選擇想要的容器包裝</h2>
+    <ul class="row list-unstyled" id="productVaseRenderArea">
+        <!-- <li class="col-6 col-md-4 col-lg-3 col-xl-2 diy12-li">
+            <label class="text-center w-100" for="diy12">
+                <div class="border border-primary80 w-100 p-1 mb-5 radious20 vaseImage productItemBorder">
+                    <div class="productItem" style="background-image: url('assets/images/diy/diy12.jpg');">
+
+                    </div>
+                </div>
+                
+                <h3 class="h5 text-dark">花束</h3>
+                
+            </label>
+            <input type="radio" name="vase" id="diy12" value="花束" onclick="checkedVase(12)" class="" checked="true">
+        </li> -->
+    </ul>
+    <hr class=" border border-primary60 my-5 my-lg-10">
+    <h2 class="h5 fsz-lg-36 text-dark fw-bold text-center mb-8 mb-lg-12" id="step3">Step 3. 請填寫您的個人資料</h2>
+    <div class="d-flex flex-column align-items-center">
+        <div class="w-lg-75">
+            <label class="mb-4" for="orderName">請輸入姓名：</label>
+            <input type="text" class="form-control mb-4 mb-lg-7" id="orderName">
+        
+            <label class="mb-4" for="orderPhoneNum">請輸入連絡電話：</label>
+            <input type="text" class="form-control mb-4 mb-lg-7" id="orderPhoneNum">
+        
+            <label class="mb-4" for="orderMail">請輸入Email：</label>
+            <input type="email" class="form-control mb-4 mb-lg-7" id="orderMail">
+
+            <label class="mb-4" for="orderAddress">請輸入寄送地址：</label>
+            <input type="text" class="form-control mb-4 mb-lg-7" id="orderAddress">
+        </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center">
+        <div class="btn-big">
+            <a class="w-100" role="button" onclick="sendProductOrder()">送出</a>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="./assets/js/all.js"></script>
+<script>
+  productInit();
+</script>

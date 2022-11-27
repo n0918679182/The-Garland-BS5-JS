@@ -30,6 +30,11 @@ button, button:focus{
         font-size: 40px;
     }
 }
+.fsz-lg-36{
+    @include lg{
+        font-size: 36px;
+    }
+}
 .fsz-lg-28{
     @include lg{
         font-size: 28px;
@@ -62,4 +67,12 @@ button, button:focus{
 }
 .ls-2helf{
     letter-spacing: 2.5px;
+}
+.w-lg-75{
+    @include md{
+        width: 100%;
+    }
+    @include lg{
+        width: 75%;
+    }
 }
