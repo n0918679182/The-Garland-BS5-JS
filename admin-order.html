@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Garland - 課程管理</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- material icons -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">
+    
+    <!-- swipper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+    <!-- my css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/style/all.css">
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+      <div class="container">
+        
+        <div class="row">
+            <div class="col-2 vh-100 pt-8 d-flex flex-column align-items-center fixed-top">
+                <a href="index.html"><img src="assets/images/Logo-big.png" alt="The Garland" style="width:140px;"></a>
+                <nav class="d-flex flex-column w-100" style=" margin-top:114px;">
+                    <ul class="list-unstyled text-center sideMenu">
+                      <li class="mb-14" id="coursePage">
+                          <a href="admin-course.html" class="text-dark h4">課程管理</a>
+                      </li>
+                      <li class="mb-14" id="memberPage">
+                          <a href="admin-member.html" class="text-dark h4">會員資訊</a>
+                      </li>
+                      <li class="mb-14" id="orderPage">
+                        <a href="admin-order.html" class="text-dark h4">訂單管理</a>
+                      </li>
+                      <li id="ConsultationPage">
+                          <a href="#" class="text-dark h4" onclick="logout()">管理員登出</a>
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-10 p-8">
+              <div class="pt-4 d-flex justify-content-between align-items-center mb-6">
+    <h2 class="h3 text-dark fw-bold">訂單管理</h2>
+</div>
+<h3 class="h4 text-dark">請輸入搜尋條件<span class="h6 ms-5">*請輸入一個或多個條件做查詢</span></h3>
+<div class="radious8 border border-2 border-dark w-100 px-6 py-4 mb-7 row">
+    <div class="mb-3 col-7 d-flex align-items-center">
+        <label for="formGroupExampleInput" class="form-label m-0">訂單日期：</label>
+        <input type="text" class="form-control ms-5" style="width: 35%;" id="orderData1" placeholder="起始日　ex: 2022-01-01">
+        <p class="mb-0 ms-3">~</p>
+        <input type="text" class="form-control ms-3" style="width: 35%;" id="orderData2" placeholder="結束日　ex: 2022-01-01">
+    </div>
+    <div class="mb-3 col-5 d-flex align-items-center">
+        <label for="formGroupExampleInput" class="form-label m-0">客戶姓名：</label>
+        <input type="text" class="form-control ms-5" style="width: 70%;" id="orderName" placeholder="請輸入客戶姓名">
+    </div>
+    <div class="mb-3 col-7 d-flex align-items-center">
+        <label for="formGroupExampleInput" class="form-label m-0">訂單編號：</label>
+        <input type="text" class="form-control ms-5 w-75" id="orderId" placeholder="請輸入訂單編號">
+    </div>
+    <div class="mb-3 col-5 d-flex align-items-center">
+        <label for="formGroupExampleInput" class="form-label m-0">連絡電話：</label>
+        <input type="text" class="form-control ms-5" style="width: 70%;" id="orderPhone" placeholder="請輸入連絡電話">
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+        <div class="btn-small adminOrderSearchBtn">
+            <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" onclick="searchOrder()">查詢</a>
+        </div>
+    </div>
+</div>
+<h3 class="h4 text-dark">搜尋結果</h3>
+<div class="radious8 border border-2 border-dark w-100 px-6 py-4 row list-unstyled">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">顧客姓名</th>
+                <th scope="col">訂單編號</th>
+                <th scope="col">出貨日期</th>
+                <th scope="col">訂單詳細資料</th>
+            </tr>
+        </thead>
+        <tbody id="adminOrderListArea">
+            <!-- <tr class="align-middle">
+                <td>王大明</td>
+                <td>202209280001</td>
+                <td>2022 / 10 / 03</td>
+                <td>
+                    <div class="btn-small adminOrderDetailBtn">
+                        <a class="w-100 d-none d-lg-flex justify-content-lg-center" href="#" data-bs-toggle="modal"
+                            data-bs-target="#courseTable">檢視</a>
+                    </div>
+                </td>
+            </tr> -->
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- 訂單管理表單 Modal -->
+<div class="modal fade" id="adminOrderTable" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog" style="max-width: 400px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h3 fw-bold text-dark" id="modalTitle">訂單明細</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="d-flex flex-column px-5 text-dark">
+                    <div class="d-flex justify-content-between mb-1">
+                        <p class="m-0 fw-bolder">訂單編號：</p>
+                        <p class="m-0" id="adminOrderSerialNum"></p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <p class="m-0 fw-bolder">訂單姓名：</p>
+                        <p class="m-0" id="adminOrderUserName"></p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <p class="m-0 fw-bolder">連絡電話：</p>
+                        <p class="m-0" id="adminOrderPhone"></p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <p class="m-0 fw-bolder">訂單日期：</p>
+                        <p class="m-0" id="adminOrderOrderDate"></p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p class="m-0 fw-bolder">預估出貨日期：</p>
+                        <p class="m-0" id="adminOrderShipDate"></p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <p class="m-0 fw-bolder">收貨人姓名：</p>
+                        <p class="m-0" id="adminOrderReceiveName"></p>
+                    </div>
+                    <div class="mb-2">
+                        <p class="m-0 fw-bolder">出貨地址：</p>
+                        <p class="m-0" id="adminOrderAddress"></p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="m-0 fw-bolder w-25">訂單狀態：</p>
+                        <select class="form-select w-50" aria-label="Default select example" id="adminOrderState" data-orderId="" onchange="changeOrderState()">
+                            <option value="1">待出貨</option>
+                            <option value="2">已出貨</option>
+                            <option value="3">送達門市</option>
+                            <option value="4">已取貨</option>
+                            <option value="5">訂單取消</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="mb-2 fw-bolder">訂購內容：</p>
+                        <div class="d-flex justify-content-center">
+                            <ul class="w-75 p-0" id="adminOrderProductArea">
+                                <!-- <li class="d-flex justify-content-between mb-1">
+                                    <p class="m-0">蝴蝶蘭</p>
+                                    <p class="m-0">150 $</p>
+                                </li>
+                                <li class="d-flex justify-content-between mb-1">
+                                    <p class="m-0">銀芽柳</p>
+                                    <p class="m-0">250 $</p>
+                                </li>
+                                <li class="d-flex justify-content-between mb-1">
+                                    <p class="m-0">非洲菊</p>
+                                    <p class="m-0">350 $</p>
+                                </li>
+                                <hr class="my-2">
+                                <li class="d-flex justify-content-between">
+                                    <p class="m-0">小結</p>
+                                    <p class="m-0">800 $</p>
+                                </li> -->
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteOrder()">刪除訂單</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="./assets/js/all.js"></script>
+<script>
+    adminOrderInit();
+</script>
+            </div>
+        </div>
+      </div>
+    
+    
+
+    <!-- swipper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!-- my js -->
+    <script src="./assets/js/vendors.js"></script>
+    <script src="./assets/js/all.js"></script>
+    
+    <script>
+        adminLayoutInit();        
+    </script>
+  </body>
+  
+
+</html>
+

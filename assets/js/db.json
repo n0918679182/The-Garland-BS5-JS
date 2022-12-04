@@ -402,5 +402,132 @@
       "type": "decorate"
     }
   ],
-  "flowerOrders": []
+  "flowerOrders": [
+    {
+      "flowers": [
+        "1",
+        "8",
+        "9"
+      ],
+      "vases": "12",
+      "totalCost": 690,
+      "name": "Wayne",
+      "phone": "0912345678",
+      "mail": "nnnn123@gmail.com",
+      "address": "台中市消波塊",
+      "usersId": 1,
+      "orderDate": "2022-12-01T14:12:49.030Z",
+      "state": 1,
+      "serialNum": "202212189292",
+      "id": 1
+    },
+    {
+      "flowers": [
+        "8",
+        "9",
+        "10"
+      ],
+      "vases": "12",
+      "totalCost": 720,
+      "name": "Anne",
+      "phone": "0999876536",
+      "mail": "aaaa123@gmail.com",
+      "address": "花蓮市",
+      "usersId": 2,
+      "orderDate": "2022-12-02T02:27:46.571Z",
+      "state": 3,
+      "serialNum": "202212297445",
+      "id": 2
+    },
+    {
+      "flowers": [
+        "5",
+        "6",
+        "11"
+      ],
+      "vases": "12",
+      "totalCost": 950,
+      "name": "Wayne",
+      "phone": "0922123432",
+      "mail": "nnnn123@gmail.com",
+      "address": "台中",
+      "usersId": 1,
+      "orderDate": "2022-12-02T02:29:38.082Z",
+      "state": 4,
+      "serialNum": "202212222766",
+      "id": 3
+    },
+    {
+      "flowers": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vases": "12",
+      "totalCost": 950,
+      "name": "Wayne",
+      "phone": "0922123432",
+      "mail": "nnnn123@gmail.com",
+      "address": "台中",
+      "usersId": 1,
+      "orderDate": "2022-11-02T02:29:38.082Z",
+      "state": 4,
+      "serialNum": "202212222765",
+      "id": 4
+    },
+    {
+      "flowers": [
+        "1",
+        "2",
+        "3"
+      ],
+      "vases": "12",
+      "totalCost": 950,
+      "name": "Wayne",
+      "phone": "0922123432",
+      "mail": "nnnn123@gmail.com",
+      "address": "台中",
+      "usersId": 1,
+      "orderDate": "2022-10-02T02:29:38.082Z",
+      "state": 2,
+      "serialNum": "202212222764",
+      "id": 5
+    },
+    {
+      "flowers": [
+        "9",
+        "10",
+        "11"
+      ],
+      "vases": "12",
+      "totalCost": 780,
+      "name": "Wayne的朋友B",
+      "phone": "0999888777",
+      "mail": "nnnn123@gmail.com",
+      "address": "宜蘭縣三星鄉楓林一路20號",
+      "usersId": 1,
+      "orderDate": "2022-12-04T08:20:54.432Z",
+      "state": 1,
+      "serialNum": "202212492722",
+      "id": 6
+    },
+    {
+      "flowers": [
+        "9",
+        "10",
+        "11"
+      ],
+      "vases": "12",
+      "totalCost": 780,
+      "name": "Anne的姊姊",
+      "phone": "0999888777",
+      "mail": "aaaa123@gmail.com",
+      "address": "臺中市北屯區崇德十八路10號",
+      "usersId": 2,
+      "orderDate": "2022-12-04T08:20:54.432Z",
+      "state": 1,
+      "serialNum": "202212492723",
+      "id": 7
+    }
+  ]
 }

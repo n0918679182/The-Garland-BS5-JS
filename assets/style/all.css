@@ -18100,6 +18100,14 @@ footer .scale01:hover {
   background: linear-gradient(#ffd8d8, #fff 15%);
 }
 
+.orderProduct {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+}
+
 .modal-dialog {
   max-width: 1000px !important;
 }
@@ -18130,6 +18138,51 @@ footer .scale01:hover {
 
 .adminMemberModal.op0 {
   opacity: 0;
+}
+
+.adminOrderSearchBtn {
+  width: 120px;
+  background: #ee7d7b;
+}
+
+.adminOrderSearchBtn:hover {
+  background: #e25653;
+}
+
+.adminOrderSearchBtn a {
+  height: 30px;
+}
+
+.adminOrderDetailBtn {
+  background: #ee7d7b;
+}
+
+.adminOrderDetailBtn:hover {
+  background: #e25653;
+}
+
+.adminOrderDetailBtn a {
+  height: 30px;
+}
+
+#orderData1::-webkit-input-placeholder, #orderData2::-webkit-input-placeholder {
+  font-size: 14px !important;
+}
+
+#orderData1::-moz-placeholder, #orderData2::-moz-placeholder {
+  font-size: 14px !important;
+}
+
+#orderData1:-ms-input-placeholder, #orderData2:-ms-input-placeholder {
+  font-size: 14px !important;
+}
+
+#orderData1::-ms-input-placeholder, #orderData2::-ms-input-placeholder {
+  font-size: 14px !important;
+}
+
+#orderData1::placeholder, #orderData2::placeholder {
+  font-size: 14px !important;
 }
 
 .productItemBorder {

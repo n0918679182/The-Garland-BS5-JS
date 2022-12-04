@@ -228,24 +228,25 @@ function adminLayoutInit() {
   var pageCode = localStorage.getItem('pageCode');
   var memberPage = document.getElementById('memberPage');
   var coursePage = document.getElementById('coursePage');
+  var orderPage = document.getElementById('orderPage');
   var ConsultationPage = document.getElementById('ConsultationPage');
 
   if (pageCode == 0) {
     memberPage.classList.remove('onPage');
     coursePage.classList.remove('onPage');
-    ConsultationPage.classList.remove('onPage');
+    orderPage.classList.remove('onPage');
   } else if (pageCode == 1) {
     memberPage.classList.add('onPage');
     coursePage.classList.remove('onPage');
-    ConsultationPage.classList.remove('onPage');
+    orderPage.classList.remove('onPage');
   } else if (pageCode == 2) {
     memberPage.classList.remove('onPage');
     coursePage.classList.add('onPage');
-    ConsultationPage.classList.remove('onPage');
+    orderPage.classList.remove('onPage');
   } else if (pageCode == 3) {
     memberPage.classList.remove('onPage');
     coursePage.classList.remove('onPage');
-    ConsultationPage.classList.add('onPage');
+    orderPage.classList.add('onPage');
   }
 
   function logout() {
@@ -269,6 +270,294 @@ function adminLayoutInit() {
 
 }
 "use strict";
+
+function adminMemberInit() {
+  // 控制左側選單 選中時的效果
+  localStorage.setItem("pageCode", 1); // 渲染會員清單
+
+  axios.get('http://localhost:3000/users').then(function (resp) {
+    renderMemberList(resp.data);
+  });
+  document.getElementById('searchMember').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      document.getElementById('searchMemberBT').click();
+    }
+  });
+} // 渲染會員清單的方法
+
+
+function renderMemberList(aryData) {
+  var memberListRenderArea = document.getElementById('memberListRenderArea'); // 渲染會員清單的區域
+
+  var memberListTemp = ''; // 暫存渲染的HTML
+
+  aryData.forEach(function (o) {
+    if (o.permission == "administrator") {
+      return;
+    } else {
+      var n = o.name;
+      memberListTemp += "<li class=\"col-2 mb-13\">\n                    <a class=\"rounded-circle bg-primary60 d-flex justify-content-center align-items-center memberPic\" \n                        data-bs-toggle=\"modal\" data-bs-target=\"#memberModal\" onclick=\"renderMemberModal('".concat(o.id, "')\">\n                        <h3 class=\"h5 text-white m-0\">").concat(o.name, "</h3>\n                    </a>\n                </li>");
+    }
+  });
+  memberListRenderArea.innerHTML = memberListTemp;
+} // 渲染會員modal的方法
+
+
+function renderMemberModal(oid) {
+  var mName = document.getElementById('memberModalLabel');
+  var mAccount = document.getElementById('mAccount');
+  var mPwd = document.getElementById('mPwd');
+  var mMail = document.getElementById('mMail');
+  var mPhone = document.getElementById('mPhone');
+  var mAddress = document.getElementById('mAddress');
+  var deleteMemberBT = document.getElementById('deleteMemberBT');
+  axios.get('http://localhost:3000/users/' + oid).then(function (resp) {
+    var obj = resp.data;
+    mName.textContent = obj.name;
+    mAccount.textContent = obj.account;
+    mPwd.textContent = obj.password;
+    mMail.textContent = obj.mail;
+    mPhone.textContent = obj.phone;
+    mAddress.textContent = obj.address;
+    deleteMemberBT.dataset.memberId = obj.id;
+  });
+} // 讓原本的對話框消失
+
+
+function didappearArea() {
+  console.log('didappearArea');
+  document.querySelector('.adminMemberModal').classList.add('op0');
+} // 回復消失的對話框
+
+
+function appearArea() {
+  document.querySelector('.adminMemberModal').classList.remove('op0');
+} // 刪除會員的方法
+
+
+function deleteMember() {
+  var deleteMemberBT = document.getElementById('deleteMemberBT');
+  var memberId = deleteMemberBT.dataset.memberId;
+  axios["delete"]('http://localhost:3000/users/' + memberId).then(function (resp) {
+    location.href = 'admin-member.html';
+  });
+} // 關鍵字搜尋並重新渲染畫面
+
+
+function searchMember() {
+  var keyword = document.getElementById('searchMember');
+
+  if (keyword.value == '') {
+    axios.get('http://localhost:3000/users').then(function (resp) {
+      renderMemberList(resp.data);
+    });
+  } else {
+    axios.get('http://localhost:3000/users?q=' + keyword.value).then(function (resp) {
+      renderMemberList(resp.data);
+    });
+  }
+}
+"use strict";
+
+function adminOrderInit() {
+  // 控制左側選單 選中時的效果
+  localStorage.setItem("pageCode", 3);
+  Promise.all([axios.get('http://localhost:3000/flowerOrders'), axios.get('http://localhost:3000/users')]).then(function (resp) {
+    var orders = resp[0].data;
+    var users = resp[1].data;
+    renderAdminOrderList(orders, users);
+  });
+} // 渲染訂單清單的方法
+
+
+function renderAdminOrderList(ordersAry, usersAry) {
+  var adminOrderListArea = document.getElementById('adminOrderListArea');
+  var temp = '';
+  ordersAry.forEach(function (o) {
+    var userData = usersAry.filter(function (u) {
+      return u.id == o.usersId;
+    });
+    temp += "\n            <tr class=\"align-middle\">\n                <td>".concat(userData[0].name, "</td>\n                <td>").concat(o.serialNum, "</td>\n                <td>").concat(o.orderDate.substring(0, 10), "</td>\n                <td>\n                    <div class=\"btn-small adminOrderDetailBtn\">\n                        <a class=\"w-100 d-none d-lg-flex justify-content-lg-center\" href=\"#\" data-bs-toggle=\"modal\"\n                            data-bs-target=\"#adminOrderTable\" onClick=\"orderDetail(").concat(o.id, ")\">\u6AA2\u8996</a>\n                    </div>\n                </td>\n            </tr>");
+  });
+  adminOrderListArea.innerHTML = temp;
+} // 依據輸入的關鍵字做查詢
+
+
+function searchOrder() {
+  var orderData2 = document.getElementById('orderData2');
+  var orderData1 = document.getElementById('orderData1');
+  var orderName = document.getElementById('orderName');
+  var orderId = document.getElementById('orderId');
+  var orderPhone = document.getElementById('orderPhone');
+
+  if (orderData2.value == '' && orderData1.value == '' && orderName.value == '' && orderId.value == '' && orderPhone.value == '') {
+    // 如果都沒有輸入就渲染全部
+    Promise.all([axios.get('http://localhost:3000/flowerOrders'), axios.get('http://localhost:3000/users')]).then(function (resp) {
+      var orders = resp[0].data;
+      var users = resp[1].data;
+      renderAdminOrderList(orders, users);
+      ;
+    });
+  } else {
+    // 否則在網址列使用方法做查詢
+    axios.get('http://localhost:3000/users').then(function (resp) {
+      var users = resp.data;
+      axios.get('http://localhost:3000/flowerOrders' + filterName(users) + filterId() + filterPhone()).then(function (r) {
+        var orders = r.data;
+
+        if (orderData1.value != '' || orderData2.value != '') {
+          var ordersInDate = filterDate(orderData1.value, orderData2.value, orders);
+          renderAdminOrderList(ordersInDate, users);
+        } else {
+          renderAdminOrderList(orders, users);
+        }
+      });
+    });
+  }
+} // 根據訂單姓名做篩選
+
+
+function filterName(users) {
+  var orderName = document.getElementById('orderName').value;
+  var user = users.filter(function (o) {
+    return o.name == orderName;
+  })[0];
+
+  if (orderName == '') {
+    return '';
+  } else {
+    return '?usersId=' + user.id;
+  }
+} // 根據訂單編號做篩選
+
+
+function filterId() {
+  var orderId = document.getElementById('orderId').value;
+
+  if (orderId == '') {
+    return '';
+  } else {
+    if (filterName() == '') {
+      return '?serialNum=' + orderId;
+    } else {
+      return '&serialNum=' + orderId;
+    }
+  }
+} // 根據訂單電話做篩選
+
+
+function filterPhone() {
+  var orderPhone = document.getElementById('orderPhone').value;
+
+  if (orderPhone == '') {
+    return '';
+  } else {
+    if (filterName() == '' && filterId() == '') {
+      return '?phone=' + orderPhone;
+    } else {
+      return '&phone=' + orderPhone;
+    }
+  }
+} // 根據日期範圍做篩選
+
+
+function filterDate(d1, d2, ary) {
+  if (d1 == '') {
+    d1 = new Date('1990/01/01');
+  }
+
+  if (d2 == '') {
+    d2 = new Date().toLocaleDateString().split('/').join('-');
+  }
+
+  var newAry = ary.filter(function (o) {
+    return new Date(o.orderDate.substring(0, 10)).getTime() >= new Date(d1).getTime() && new Date(o.orderDate.substring(0, 10)).getTime() <= new Date(d2).getTime();
+  });
+  return newAry;
+} // 渲染訂單明細的方法
+
+
+function orderDetail(id) {
+  var adminOrderSerialNum = document.getElementById('adminOrderSerialNum'); //訂單編號
+
+  var adminOrderUserName = document.getElementById('adminOrderUserName'); //訂單姓名
+
+  var adminOrderPhone = document.getElementById('adminOrderPhone'); //連絡電話
+
+  var adminOrderOrderDate = document.getElementById('adminOrderOrderDate'); //訂單日期
+
+  var adminOrderShipDate = document.getElementById('adminOrderShipDate'); //預估出貨日期
+
+  var adminOrderReceiveName = document.getElementById('adminOrderReceiveName'); //收貨人姓名
+
+  var adminOrderAddress = document.getElementById('adminOrderAddress'); //出貨地址
+
+  var adminOrderState = document.getElementById('adminOrderState'); //訂單狀態
+
+  adminOrderState.dataset.orderId = id;
+  Promise.all([axios.get('http://localhost:3000/flowerOrders?id=' + id), axios.get('http://localhost:3000/users')]).then(function (resp) {
+    var order = resp[0].data[0];
+    var users = resp[1].data;
+    adminOrderSerialNum.textContent = order.serialNum;
+    adminOrderUserName.textContent = users.filter(function (o) {
+      return o.id == order.usersId;
+    })[0].name;
+    adminOrderPhone.textContent = order.phone;
+    adminOrderOrderDate.textContent = order.orderDate.substring(0, 10);
+    var orderDate = new Date(order.orderDate.substring(0, 10));
+    adminOrderShipDate.textContent = orderDate.addDays(3);
+    adminOrderReceiveName.textContent = order.name;
+    adminOrderAddress.textContent = order.address;
+    adminOrderState.value = order.state;
+    renderAdminOrderProductArea(order);
+  });
+} // 指定日期加上天數的方法
+
+
+Date.prototype.addDays = function (days) {
+  this.setDate(this.getDate() + days);
+  return this.toLocaleDateString().split('/').join('-');
+}; // 渲染明細內的產品清單
+
+
+function renderAdminOrderProductArea(ary) {
+  var adminOrderProductArea = document.getElementById('adminOrderProductArea'); //訂購內容
+
+  var temp = '';
+  axios.get('http://localhost:3000/products').then(function (resp) {
+    ary.flowers.forEach(function (o) {
+      temp += "\n            <li class=\"d-flex justify-content-between mb-1\">\n                <p class=\"m-0\">".concat(resp.data.filter(function (p) {
+        return p.id == o;
+      })[0].name, "</p>\n                <p class=\"m-0\">").concat(resp.data.filter(function (p) {
+        return p.id == o;
+      })[0].price, " $</p>\n            </li>\n            ");
+    });
+    temp += "\n            <li class=\"d-flex justify-content-between mb-1\">\n                <p class=\"m-0\">\u904B\u8CBB</p>\n                <p class=\"m-0\">80 $</p>\n            </li>\n            <hr class=\"my-2\">\n            <li class=\"d-flex justify-content-between\">\n                <p class=\"m-0\">\u5C0F\u7D50</p>\n                <p class=\"m-0\">".concat(ary.totalCost + 80, " $</p>\n            </li>\n            ");
+    adminOrderProductArea.innerHTML = temp;
+  });
+} // 修改訂單狀態的方法
+
+
+function changeOrderState() {
+  var adminOrderState = document.getElementById('adminOrderState'); //訂單狀態
+
+  axios.patch('http://localhost:3000/flowerOrders/' + adminOrderState.dataset.orderId, {
+    "state": parseInt(adminOrderState.value)
+  }).then(function (resp) {
+    console.log('狀態更改成功');
+  });
+} // 刪除訂單
+
+
+function deleteOrder() {
+  var adminOrderState = document.getElementById('adminOrderState'); //訂單狀態(單純要取得訂單id)
+
+  console.log(adminOrderState.dataset.orderId);
+  axios["delete"]('http://localhost:3000/flowerOrders/' + adminOrderState.dataset.orderId).then(function (resp) {
+    alert('訂單已取消');
+    location.href = 'admin-order.html';
+  });
+}
 "use strict";
 
 function indexInit() {
@@ -681,9 +970,13 @@ function memberLayoutInit() {
   // 側邊選單
 
   var toMemberAccount = document.getElementById('toMemberAccount');
-  var toMemberCourse = document.getElementById('toMemberCourse');
   var toMemberAccountSm = document.getElementById('toMemberAccountSm');
+  var toMemberCourse = document.getElementById('toMemberCourse');
   var toMemberCourseSm = document.getElementById('toMemberCourseSm');
+  var toMemberOrder = document.getElementById('toMemberOrder');
+  var toMemberOrderSm = document.getElementById('toMemberOrderSm');
+  var toMeberConsulation = document.getElementById('toMeberConsulation');
+  var toMeberConsulationSm = document.getElementById('toMeberConsulationSm');
 
   if (memberPageCode == 1) {
     toMemberAccount.classList.add('onPage');
@@ -692,6 +985,12 @@ function memberLayoutInit() {
     toMemberCourse.classList.remove('onPage');
     toMemberCourseSm.classList.add('text-dark');
     toMemberCourseSm.classList.remove('text-primary');
+    toMemberOrder.classList.remove('onPage');
+    toMemberOrderSm.classList.add('text-dark');
+    toMemberOrderSm.classList.remove('text-primary');
+    toMeberConsulation.classList.remove('onPage');
+    toMeberConsulationSm.classList.add('text-dark');
+    toMeberConsulationSm.classList.remove('text-primary');
   } else if (memberPageCode == 2) {
     toMemberAccount.classList.remove('onPage');
     toMemberAccountSm.classList.add('text-dark');
@@ -699,6 +998,38 @@ function memberLayoutInit() {
     toMemberCourse.classList.add('onPage');
     toMemberCourseSm.classList.remove('text-dark');
     toMemberCourseSm.classList.add('text-primary');
+    toMemberOrder.classList.remove('onPage');
+    toMemberOrderSm.classList.add('text-dark');
+    toMemberOrderSm.classList.remove('text-primary');
+    toMeberConsulation.classList.remove('onPage');
+    toMeberConsulationSm.classList.add('text-dark');
+    toMeberConsulationSm.classList.remove('text-primary');
+  } else if (memberPageCode == 3) {
+    toMemberAccount.classList.remove('onPage');
+    toMemberAccountSm.classList.add('text-dark');
+    toMemberAccountSm.classList.remove('text-primary');
+    toMemberCourse.classList.remove('onPage');
+    toMemberCourseSm.classList.add('text-dark');
+    toMemberCourseSm.classList.remove('text-primary');
+    toMemberOrder.classList.add('onPage');
+    toMemberOrderSm.classList.remove('text-dark');
+    toMemberOrderSm.classList.add('text-primary');
+    toMeberConsulation.classList.remove('onPage');
+    toMeberConsulationSm.classList.add('text-dark');
+    toMeberConsulationSm.classList.remove('text-primary');
+  } else if (memberPageCode == 4) {
+    toMemberAccount.classList.remove('onPage');
+    toMemberAccountSm.classList.add('text-dark');
+    toMemberAccountSm.classList.remove('text-primary');
+    toMemberCourse.classList.remove('onPage');
+    toMemberCourseSm.classList.add('text-dark');
+    toMemberCourseSm.classList.remove('text-primary');
+    toMemberOrder.classList.remove('onPage');
+    toMemberOrderSm.classList.add('text-dark');
+    toMemberOrderSm.classList.remove('text-primary');
+    toMeberConsulation.classList.add('onPage');
+    toMeberConsulationSm.classList.remove('text-dark');
+    toMeberConsulationSm.classList.add('text-primary');
   }
 
   var swiper = new Swiper(".memberNavSwiper", {
@@ -727,12 +1058,51 @@ function logout() {
 }
 "use strict";
 
-function productInit() {
-  // 渲染表單
-  axios.get('http://localhost:3000/products').then(function (resp) {
-    renderProductFlowerList(resp.data);
-    renderProductVaseList(resp.data);
+function memberOrderInit() {
+  localStorage.setItem("memberPageCode", 3);
+  var loginMember = JSON.parse(localStorage.getItem('loginMember'));
+  Promise.all([axios.get('http://localhost:3000/flowerOrders?usersId=' + loginMember.id), axios.get('http://localhost:3000/products')]).then(function (resp) {
+    var orders = resp[0].data;
+    var products = resp[1].data;
+    renderOrder(orders, products);
   });
+} // 渲染訂單的方法
+
+
+function renderOrder(orders, products) {
+  var orderTemp = '';
+  var accordionArea = document.getElementById('accordionArea'); // 先渲染出每筆訂單
+
+  orders.forEach(function (o) {
+    orderTemp += "\n        <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingOne".concat(o.id, "\">\n                <div class=\"accordion-button \" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne").concat(o.id, "\" aria-expanded=\"true\" aria-controls=\"collapseOne").concat(o.id, "\">\n                    <div class=\"d-flex justify-content-between align-items-center w-100 pe-5\">\n                        <p class=\"m-0\">\u8A02\u55AE\u7DE8\u865F\uFF1A").concat(o.serialNum, "</p>\n                        <p class=\"m-0\">").concat(o.orderDate.substring(0, 10), "</p>\n                    </div>\n                </div>\n            </h2>\n            <div id=\"collapseOne").concat(o.id, "\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingOne").concat(o.id, "\" data-bs-parent=\"#accordionArea\">\n                <div class=\"accordion-body\" id=\"orderProductsArea\">\n                    <ul class=\"list-unstyled row\" id=\"productsArea").concat(o.id, "\">\n\n                        \n                    </ul>\n                </div>\n                <div class=\"w-100 bg-primaryTint py-3 pe-10 d-flex justify-content-end\">\n                    <div class=\"d-flex flex-column w-25 text-dark\">\n                        <div class=\"d-flex justify-content-between mb-1\">\n                            <p class=\"m-0\">\u5C0F\u8A08\uFF1A</p>\n                            <p class=\"m-0\">NT$ ").concat(o.totalCost, "</p>\n                        </div>\n                        <div class=\"d-flex justify-content-between mb-1\">\n                            <p class=\"m-0\">\u904B\u8CBB\uFF1A</p>\n                            <p class=\"m-0\">NT$ 80</p>\n                        </div>\n                        <div class=\"d-flex justify-content-between mb-1 fw-bolder\">\n                            <p class=\"m-0\">\u7E3D\u8A08\uFF1A</p>\n                            <p class=\"m-0\">NT$ ").concat(o.totalCost + 80, "</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"accordion-body\">\n                    <p>\u8A02\u55AE\u72C0\u614B\uFF1A").concat(o.state == 1 ? '待出貨' : o.state == 2 ? '已出貨' : o.state == 3 ? '送達門市' : '已取貨', "</p>\n                    <p>\u4ED8\u6B3E\u65B9\u5F0F\uFF1A\u8CA8\u5230\u4ED8\u6B3E</p>\n                    <p>\u6536\u4EF6\u5730\u5740\uFF1A").concat(o.address, "</p>\n                </div>\n            </div>\n        </div>");
+  });
+  accordionArea.innerHTML = orderTemp; // 才能渲染每筆訂單內的所有商品
+
+  orders.forEach(function (o) {
+    var productTemp = '';
+    var productsArea = document.getElementById("productsArea".concat(o.id));
+    o.flowers.forEach(function (p) {
+      productTemp += "\n                <li class=\"col-sm-6 col-xl-4 d-flex justify-content-around align-items-center mb-3\">\n                    <div class=\"radious8 orderProduct shadow\" style=\"background-image: url('assets/images/diy/".concat(products[parseInt(p) - 1].imgName, "');\"></div>\n                    <p class=\"m-0\">").concat(products[parseInt(p) - 1].name, "</p>\n                    <p class=\"m-0\">NT$").concat(products[parseInt(p) - 1].price, "</p>\n                </li>\n            ");
+    });
+    productTemp += "\n            <li class=\"col-sm-6 col-xl-4 d-flex justify-content-around align-items-center mb-3\">\n                <div class=\"radious8 orderProduct shadow\" style=\"background-image: url('assets/images/diy/".concat(products[parseInt(o.vases) - 1].imgName, "');\"></div>\n                <p class=\"m-0\">").concat(products[parseInt(o.vases) - 1].name, "</p>\n                <p class=\"m-0\">NT$").concat(products[parseInt(o.vases) - 1].price, "</p>\n            </li>\n        ");
+    productsArea.innerHTML = productTemp;
+  });
+}
+"use strict";
+
+function productInit() {
+  var loginMember = JSON.parse(localStorage.getItem("loginMember"));
+
+  if (!loginMember) {
+    alert('請先登入');
+    location.href = 'login.html';
+  } else {
+    // 渲染表單
+    axios.get('http://localhost:3000/products').then(function (resp) {
+      renderProductFlowerList(resp.data);
+      renderProductVaseList(resp.data);
+    });
+  }
 } // 渲染花卉的方法
 
 
@@ -742,7 +1112,7 @@ function renderProductFlowerList(dataAry) {
   dataAry.filter(function (o) {
     return o.type == "flower";
   }).forEach(function (o) {
-    tempStr += "\n        <li class=\"col-6 col-md-4 col-lg-3 col-xl-2 mb-5 diy".concat(o.id, "-li\">\n            <label class=\"text-center w-100\" for=\"diy").concat(o.id, "\">\n                <div class=\"border border-primary80 w-100 p-1 mb-5 radious20 itemImage imgHover\" >\n                    <div class=\"productItem\" style=\"background-image: url('assets/images/diy/").concat(o.imgName, "');\">\n\n                    </div>\n                </div>\n                \n                <h3 class=\"h5 text-dark\">").concat(o.name, "</h3>\n                \n            </label>\n            <input type=\"checkbox\" name=\"flower\" id=\"diy").concat(o.id, "\" value=\"").concat(o.name, "\" data-price=\"").concat(o.price, "\" onclick=\"chedkedItem(").concat(o.id, ")\" class=\"d-none\">\n        </li>\n        ");
+    tempStr += "\n        <li class=\"col-6 col-md-4 col-lg-3 col-xl-2 mb-5 diy".concat(o.id, "-li\">\n            <label class=\"text-center w-100\" for=\"diy").concat(o.id, "\">\n                <div class=\"border border-primary80 w-100 p-1 mb-5 radious20 itemImage imgHover\" >\n                    <div class=\"productItem\" style=\"background-image: url('assets/images/diy/").concat(o.imgName, "');\">\n\n                    </div>\n                </div>\n                \n                <h3 class=\"h5 text-dark\">").concat(o.name, "</h3>\n                \n            </label>\n            <input type=\"checkbox\" name=\"flower\" id=\"diy").concat(o.id, "\" value=\"").concat(o.id, "\" data-price=\"").concat(o.price, "\" onclick=\"chedkedItem(").concat(o.id, ")\" class=\"d-none\">\n        </li>\n        ");
   });
   productFlowerRenderArea.innerHTML = tempStr;
 } // 給已選取的選項加上css效果
@@ -784,7 +1154,7 @@ function renderProductVaseList(dataAry) {
   dataAry.filter(function (o) {
     return o.type == "decorate";
   }).forEach(function (o) {
-    tempStr += "\n        <li class=\"col-6 col-md-4 col-lg-3 col-xl-2 mb-5 diy".concat(o.id, "-li\">\n            <label class=\"text-center w-100\" for=\"diy").concat(o.id, "\">\n                <div class=\"border border-primary80 w-100 p-1 mb-5 radious20 vaseImage imgHover\">\n                    <div class=\"productItem\" style=\"background-image: url('assets/images/diy/").concat(o.imgName, "');\">\n\n                    </div>\n                </div>\n                \n                <h3 class=\"h5 text-dark\">").concat(o.name, "</h3>\n                \n            </label>\n            <input type=\"radio\" name=\"vase\" id=\"diy").concat(o.id, "\" value=\"").concat(o.name, "\" data-price=\"").concat(o.price, "\" onclick=\"checkedVase(").concat(o.id, ")\" class=\"d-none\">\n        </li>\n        ");
+    tempStr += "\n        <li class=\"col-6 col-md-4 col-lg-3 col-xl-2 mb-5 diy".concat(o.id, "-li\">\n            <label class=\"text-center w-100\" for=\"diy").concat(o.id, "\">\n                <div class=\"border border-primary80 w-100 p-1 mb-5 radious20 vaseImage imgHover\">\n                    <div class=\"productItem\" style=\"background-image: url('assets/images/diy/").concat(o.imgName, "');\">\n\n                    </div>\n                </div>\n                \n                <h3 class=\"h5 text-dark\">").concat(o.name, "</h3>\n                \n            </label>\n            <input type=\"radio\" name=\"vase\" id=\"diy").concat(o.id, "\" value=\"").concat(o.id, "\" data-price=\"").concat(o.price, "\" onclick=\"checkedVase(").concat(o.id, ")\" class=\"d-none\">\n        </li>\n        ");
   });
   productVaseRenderArea.innerHTML = tempStr;
 } // 送出訂單 + 表單驗證
@@ -792,7 +1162,7 @@ function renderProductVaseList(dataAry) {
 
 function sendProductOrder() {
   var flowers = document.querySelectorAll('input[name="flower"]');
-  var vases = document.querySelectorAll('input[name = "vase"]');
+  var vases = document.querySelector('input[name = "vase"]');
   var orderName = document.getElementById('orderName');
   var orderPhoneNum = document.getElementById('orderPhoneNum');
   var orderMail = document.getElementById('orderMail');
@@ -801,26 +1171,19 @@ function sendProductOrder() {
   var vaseName = '';
   var serialNumTemp = '';
   var orderDate = new Date();
+  var productTotalCost = 0;
   var order = {
     "flowers": []
   };
   flowers.forEach(function (o) {
     if (o.checked) {
-      var flower = {};
-      flower.name = o.value;
-      flower.price = o.dataset.price;
-      order.flowers.push(flower);
+      order.flowers.push(o.value);
+      productTotalCost += parseInt(o.dataset.price);
     }
   });
-  vases.forEach(function (o) {
-    if (o.checked) {
-      var vase = {};
-      vase.name = o.value;
-      vase.price = o.dataset.price;
-      order.vases = vase;
-      vaseName = o.value;
-    }
-  });
+  order.vases = vases.value;
+  productTotalCost += parseInt(vases.dataset.price);
+  order.totalCost = productTotalCost;
   order.name = orderName.value;
   order.phone = orderPhoneNum.value;
   order.mail = orderMail.value;
@@ -835,7 +1198,7 @@ function sendProductOrder() {
   if (order.flowers.length == 0) {
     alert('請選擇想使用的花卉');
     location.href = 'product.html#';
-  } else if (vaseName == '') {
+  } else if (order.vases == '') {
     alert('請選擇想使用的容器或裝飾');
     location.href = 'product.html#';
   } else if (orderName.value == '' || orderPhoneNum.value == '' || orderMail.value == '' || orderAddress.value == '') {
