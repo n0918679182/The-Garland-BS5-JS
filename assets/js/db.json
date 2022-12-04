@@ -208,6 +208,16 @@
       "id": 12,
       "userId": 6,
       "courseId": 3
+    },
+    {
+      "id": 13,
+      "userId": 11,
+      "courseId": 2
+    },
+    {
+      "id": 14,
+      "userId": 11,
+      "courseId": 1
     }
   ],
   "blogArticles": [
@@ -528,6 +538,40 @@
       "state": 1,
       "serialNum": "202212492723",
       "id": 7
+    },
+    {
+      "flowers": [
+        "4",
+        "11"
+      ],
+      "vases": "12",
+      "totalCost": 580,
+      "name": "曾大華的朋友",
+      "phone": "0999888777",
+      "mail": "j123@gmail.com",
+      "address": " 臺南市安南區新宅路22號",
+      "usersId": 11,
+      "orderDate": "2022-12-04T11:19:06.634Z",
+      "state": 1,
+      "serialNum": "202212435558",
+      "id": 8
+    },
+    {
+      "flowers": [
+        "7",
+        "8"
+      ],
+      "vases": "12",
+      "totalCost": 630,
+      "name": "曾大華",
+      "phone": "0999888777",
+      "mail": "j123@gmail.com",
+      "address": " 臺南市安南區新宅路22號",
+      "usersId": 11,
+      "orderDate": "2022-12-04T11:22:07.003Z",
+      "state": 2,
+      "serialNum": "202212472922",
+      "id": 9
     }
   ]
 }

@@ -422,6 +422,10 @@ function filterName(users) {
   var user = users.filter(function (o) {
     return o.name == orderName;
   })[0];
+  users.forEach(function (u) {
+    console.log(u.name);
+  });
+  console.log(orderName);
 
   if (orderName == '') {
     return '';
@@ -728,14 +732,14 @@ function courseDetailInit() {
 
 
   courseTableBtn.addEventListener('click', function () {
-    // 先判定是否有欄位未填
-    if (courseId.value == '' || studName.value == '' || studPhoneNum.value == '' || studMail.value == '') {
-      alert('表單輸入不完全');
+    // 判斷是否有登入
+    if (member == null) {
+      alert('請先登入喔!');
+      location.href = 'login.html';
     } else {
-      // 判斷是否有登入
-      if (member == null) {
-        alert('請先登入喔!');
-        location.href = 'login.html';
+      // 先判定是否有欄位未填
+      if (courseId.value == '' || studName.value == '' || studPhoneNum.value == '' || studMail.value == '') {
+        alert('表單輸入不完全');
       } else {
         var obj = {};
         obj.id = null;
@@ -770,6 +774,11 @@ function courseDetailInit() {
       }
     }
   });
+}
+
+function courseSignupTable() {
+  var courseTableTab = document.getElementById('courseTable-tab');
+  courseTableTab.click();
 }
 "use strict";
 
@@ -1074,7 +1083,7 @@ function renderOrder(orders, products) {
   var accordionArea = document.getElementById('accordionArea'); // 先渲染出每筆訂單
 
   orders.forEach(function (o) {
-    orderTemp += "\n        <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingOne".concat(o.id, "\">\n                <div class=\"accordion-button \" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne").concat(o.id, "\" aria-expanded=\"true\" aria-controls=\"collapseOne").concat(o.id, "\">\n                    <div class=\"d-flex justify-content-between align-items-center w-100 pe-5\">\n                        <p class=\"m-0\">\u8A02\u55AE\u7DE8\u865F\uFF1A").concat(o.serialNum, "</p>\n                        <p class=\"m-0\">").concat(o.orderDate.substring(0, 10), "</p>\n                    </div>\n                </div>\n            </h2>\n            <div id=\"collapseOne").concat(o.id, "\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingOne").concat(o.id, "\" data-bs-parent=\"#accordionArea\">\n                <div class=\"accordion-body\" id=\"orderProductsArea\">\n                    <ul class=\"list-unstyled row\" id=\"productsArea").concat(o.id, "\">\n\n                        \n                    </ul>\n                </div>\n                <div class=\"w-100 bg-primaryTint py-3 pe-10 d-flex justify-content-end\">\n                    <div class=\"d-flex flex-column w-25 text-dark\">\n                        <div class=\"d-flex justify-content-between mb-1\">\n                            <p class=\"m-0\">\u5C0F\u8A08\uFF1A</p>\n                            <p class=\"m-0\">NT$ ").concat(o.totalCost, "</p>\n                        </div>\n                        <div class=\"d-flex justify-content-between mb-1\">\n                            <p class=\"m-0\">\u904B\u8CBB\uFF1A</p>\n                            <p class=\"m-0\">NT$ 80</p>\n                        </div>\n                        <div class=\"d-flex justify-content-between mb-1 fw-bolder\">\n                            <p class=\"m-0\">\u7E3D\u8A08\uFF1A</p>\n                            <p class=\"m-0\">NT$ ").concat(o.totalCost + 80, "</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"accordion-body\">\n                    <p>\u8A02\u55AE\u72C0\u614B\uFF1A").concat(o.state == 1 ? '待出貨' : o.state == 2 ? '已出貨' : o.state == 3 ? '送達門市' : '已取貨', "</p>\n                    <p>\u4ED8\u6B3E\u65B9\u5F0F\uFF1A\u8CA8\u5230\u4ED8\u6B3E</p>\n                    <p>\u6536\u4EF6\u5730\u5740\uFF1A").concat(o.address, "</p>\n                </div>\n            </div>\n        </div>");
+    orderTemp += "\n        <div class=\"accordion-item\">\n            <h2 class=\"accordion-header\" id=\"headingOne".concat(o.id, "\">\n                <div class=\"accordion-button \" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne").concat(o.id, "\" aria-expanded=\"true\" aria-controls=\"collapseOne").concat(o.id, "\">\n                    <div class=\"d-flex justify-content-between align-items-center w-100 pe-5\">\n                        <p class=\"m-0\">\u8A02\u55AE\u7DE8\u865F\uFF1A").concat(o.serialNum, "</p>\n                        <p class=\"m-0\">").concat(o.orderDate.substring(0, 10), "</p>\n                    </div>\n                </div>\n            </h2>\n            <div id=\"collapseOne").concat(o.id, "\" class=\"accordion-collapse collapse show\" aria-labelledby=\"headingOne").concat(o.id, "\" data-bs-parent=\"#accordionArea\">\n                <div class=\"accordion-body\" id=\"orderProductsArea\">\n                    <ul class=\"list-unstyled row\" id=\"productsArea").concat(o.id, "\">\n\n                        \n                    </ul>\n                </div>\n                <div class=\"w-100 bg-primaryTint py-3 pe-10 d-flex justify-content-end\">\n                    <div class=\"d-flex flex-column w-25 text-dark\">\n                        <div class=\"d-flex justify-content-between mb-1\">\n                            <p class=\"m-0\">\u5C0F\u8A08\uFF1A</p>\n                            <p class=\"m-0\">NT$ ").concat(o.totalCost, "</p>\n                        </div>\n                        <div class=\"d-flex justify-content-between mb-1\">\n                            <p class=\"m-0\">\u904B\u8CBB\uFF1A</p>\n                            <p class=\"m-0\">NT$ 80</p>\n                        </div>\n                        <div class=\"d-flex justify-content-between mb-1 fw-bolder\">\n                            <p class=\"m-0\">\u7E3D\u8A08\uFF1A</p>\n                            <p class=\"m-0\">NT$ ").concat(o.totalCost + 80, "</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"accordion-body\">\n                    <p>\u6536\u4EF6\u4EBA\uFF1A").concat(o.name, "</p>\n                    <p>\u8A02\u55AE\u72C0\u614B\uFF1A").concat(o.state == 1 ? '待出貨' : o.state == 2 ? '已出貨' : o.state == 3 ? '送達門市' : '已取貨', "</p>\n                    <p>\u4ED8\u6B3E\u65B9\u5F0F\uFF1A\u8CA8\u5230\u4ED8\u6B3E</p>\n                    <p>\u6536\u4EF6\u5730\u5740\uFF1A").concat(o.address, "</p>\n                </div>\n            </div>\n        </div>");
   });
   accordionArea.innerHTML = orderTemp; // 才能渲染每筆訂單內的所有商品
 
@@ -1227,24 +1236,16 @@ function createSerialNum() {
 
 // 頁面初始化
 function signUpInit() {
-  var singUpAccount = document.getElementById('singUpAccount');
-  var singUpPwd = document.getElementById('singUpPwd');
-  var checkPwd = document.getElementById('checkPwd');
-  var singUpName = document.getElementById('singUpName');
-  var signUpMail = document.getElementById('signUpMail');
-  var signUpPhone = document.getElementById('signUpPhone');
-  var signUpAddress = document.getElementById('signUpAddress');
   var SignUpBT = document.getElementById('SignUpBT');
-  var checkPwdErrMSG = document.getElementById('checkPwdErrMSG');
-  var sameAccountErrMSG = document.getElementById('sameAccountErrMSG');
-  var sameMailErrMSG = document.getElementById('sameMailErrMSG');
   SignUpBT.addEventListener('click', function () {
-    if (validSignUp()) {
-      var member = newMember();
-      axios.post('http://localhost:3000/users', member).then(function (resp) {
-        location.href = 'login.html';
-      });
-    }
+    axios.get('http://localhost:3000/users').then(function (users) {
+      if (validSignUp(users)) {
+        var member = newMember();
+        axios.post('http://localhost:3000/users', member).then(function (resp) {
+          location.href = 'login.html';
+        });
+      }
+    });
   });
 } // 新增會員物件的方法
 
@@ -1263,7 +1264,36 @@ function newMember() {
 } // 註冊表單驗證
 
 
-function validSignUp() {
+function validSignUp(users) {
+  var singUpName = document.getElementById('singUpName');
+  var signUpPhone = document.getElementById('signUpPhone');
+  var signUpAddress = document.getElementById('signUpAddress');
+  var singUpAccount = document.getElementById('singUpAccount');
+  var sameAccountErrMSG = document.getElementById('sameAccountErrMSG');
+  var signUpMail = document.getElementById('signUpMail');
+  var sameMailErrMSG = document.getElementById('sameMailErrMSG');
+  var singUpPwd = document.getElementById('singUpPwd');
+  var checkPwd = document.getElementById('checkPwd');
+  var checkAccount = false;
+  var chenkMail = false;
+  sameAccountErrMSG.textContent = '';
+  sameMailErrMSG.textContent = '';
+  users.data.forEach(function (o) {
+    if (singUpAccount.value == o.account) {
+      sameAccountErrMSG.textContent = '帳號已註冊! 請直接登入或使用其他帳號!';
+      checkAccount = true;
+    } else {
+      checkAccount = false;
+    }
+
+    if (signUpMail.value == o.mail) {
+      sameMailErrMSG.textContent = '信箱已註冊! 請使用其他信箱!';
+      chenkMail = true;
+    } else {
+      chenkMail = false;
+    }
+  });
+
   if (singUpAccount.value == '' || singUpPwd.value == '' || checkPwd.value == '' || singUpName.value == '' || signUpMail.value == '' || signUpPhone.value == '' || signUpAddress.value == '') {
     alert('表單輸入不完整! 請在檢查是否有未填欄位!');
     location.href = 'signUp.html#';
@@ -1272,11 +1302,11 @@ function validSignUp() {
     alert('確認密碼與第一次輸入的密碼不相符!');
     location.href = 'signUp.html#singUpPwd';
     return false;
-  } else if (checkAccount()) {
+  } else if (checkAccount) {
     alert('帳號已註冊!');
     location.href = 'signUp.html#singUpAccount';
     return false;
-  } else if (chenkMail()) {
+  } else if (chenkMail) {
     alert('信箱已註冊!');
     location.href = 'signUp.html#singUpMail';
     return false;
@@ -1287,6 +1317,9 @@ function validSignUp() {
 
 
 function checkPassword() {
+  var singUpPwd = document.getElementById('singUpPwd');
+  var checkPwd = document.getElementById('checkPwd');
+  var checkPwdErrMSG = document.getElementById('checkPwdErrMSG');
   checkPwdErrMSG.textContent = '';
 
   if (singUpPwd.value !== checkPwd.value) {
@@ -1299,9 +1332,10 @@ function checkPassword() {
 
 
 function checkAccount() {
+  var singUpAccount = document.getElementById('singUpAccount');
+  var sameAccountErrMSG = document.getElementById('sameAccountErrMSG');
   sameAccountErrMSG.textContent = '';
   axios.get('http://localhost:3000/users').then(function (resp) {
-    console.log(resp.data);
     resp.data.forEach(function (o) {
       if (singUpAccount.value == o.account) {
         sameAccountErrMSG.textContent = '帳號已註冊! 請直接登入或使用其他帳號!';
@@ -1315,9 +1349,10 @@ function checkAccount() {
 
 
 function chenkMail() {
+  var signUpMail = document.getElementById('signUpMail');
+  var sameMailErrMSG = document.getElementById('sameMailErrMSG');
   sameMailErrMSG.textContent = '';
   axios.get('http://localhost:3000/users').then(function (resp) {
-    console.log(resp.data);
     resp.data.forEach(function (o) {
       if (signUpMail.value == o.mail) {
         sameMailErrMSG.textContent = '信箱已註冊! 請使用其他信箱!';
