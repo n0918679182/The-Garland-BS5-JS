@@ -2,23 +2,24 @@ function adminLayoutInit(){
     const pageCode = localStorage.getItem('pageCode');
     const memberPage = document.getElementById('memberPage');
     const coursePage = document.getElementById('coursePage');
+    const orderPage = document.getElementById('orderPage')
     const ConsultationPage = document.getElementById('ConsultationPage');
     if(pageCode == 0){
       memberPage.classList.remove('onPage');
       coursePage.classList.remove('onPage');
-      ConsultationPage.classList.remove('onPage');
+      orderPage.classList.remove('onPage');
     } else if(pageCode == 1){
       memberPage.classList.add('onPage');
       coursePage.classList.remove('onPage');
-      ConsultationPage.classList.remove('onPage');
+      orderPage.classList.remove('onPage');
     } else if(pageCode == 2){
       memberPage.classList.remove('onPage');
       coursePage.classList.add('onPage');
-      ConsultationPage.classList.remove('onPage');
+      orderPage.classList.remove('onPage');
     } else if(pageCode == 3){
       memberPage.classList.remove('onPage');
       coursePage.classList.remove('onPage');
-      ConsultationPage.classList.add('onPage');
+      orderPage.classList.add('onPage');
     }
 
     function logout(){

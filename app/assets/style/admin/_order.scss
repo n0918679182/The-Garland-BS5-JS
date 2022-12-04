@@ -1,0 +1,26 @@
+.adminOrderSearchBtn{
+    width: 120px;
+    background: #ee7d7b;
+    &:hover{
+        background: #e25653;
+    }
+    a{
+        height: 30px;
+    }
+}
+
+.adminOrderDetailBtn{
+    background: #ee7d7b;
+    &:hover{
+        background: #e25653;
+    }
+    a{
+        height: 30px;
+    }
+}
+
+#orderData1, #orderData2{
+    &::placeholder{
+        font-size: 14px !important;
+    }
+}

@@ -1,9 +1,16 @@
 function productInit(){
-    // 渲染表單
-    axios.get('http://localhost:3000/products').then(resp=>{
-        renderProductFlowerList(resp.data);
-        renderProductVaseList(resp.data);
-    })
+    const loginMember = JSON.parse(localStorage.getItem("loginMember"));
+    if(!loginMember){
+        alert('請先登入');
+        location.href = 'login.html';
+    }else{
+        // 渲染表單
+        axios.get('http://localhost:3000/products').then(resp=>{
+            renderProductFlowerList(resp.data);
+            renderProductVaseList(resp.data);
+        })
+    }
+   
 
    
    
@@ -26,7 +33,7 @@ function renderProductFlowerList(dataAry){
                 <h3 class="h5 text-dark">${o.name}</h3>
                 
             </label>
-            <input type="checkbox" name="flower" id="diy${o.id}" value="${o.name}" data-price="${o.price}" onclick="chedkedItem(${o.id})" class="d-none">
+            <input type="checkbox" name="flower" id="diy${o.id}" value="${o.id}" data-price="${o.price}" onclick="chedkedItem(${o.id})" class="d-none">
         </li>
         `
     })
@@ -76,7 +83,7 @@ function renderProductVaseList(dataAry){
                 <h3 class="h5 text-dark">${o.name}</h3>
                 
             </label>
-            <input type="radio" name="vase" id="diy${o.id}" value="${o.name}" data-price="${o.price}" onclick="checkedVase(${o.id})" class="d-none">
+            <input type="radio" name="vase" id="diy${o.id}" value="${o.id}" data-price="${o.price}" onclick="checkedVase(${o.id})" class="d-none">
         </li>
         `
     })
@@ -86,36 +93,30 @@ function renderProductVaseList(dataAry){
 // 送出訂單 + 表單驗證
 function sendProductOrder(){
     const flowers = document.querySelectorAll('input[name="flower"]');
-    const vases = document.querySelectorAll('input[name = "vase"]');
+    const vases = document.querySelector('input[name = "vase"]');
     const orderName = document.getElementById('orderName');
     const orderPhoneNum = document.getElementById('orderPhoneNum');
     const orderMail = document.getElementById('orderMail');
     const orderAddress = document.getElementById('orderAddress');
     const loginMember = JSON.parse(localStorage.getItem("loginMember"));
+    
     let vaseName = '';
     let serialNumTemp = '';
     let orderDate = new Date();
+    let productTotalCost = 0;
     let order = {
         "flowers" :[],
     }
     flowers.forEach(o=>{
         if(o.checked){
-            let flower = {}
-            flower.name=o.value;
-            flower.price = o.dataset.price;
-            order.flowers.push(flower);
+            order.flowers.push(o.value);
+            productTotalCost += parseInt(o.dataset.price);
         }
         
     }) 
-    vases.forEach(o=>{
-        if(o.checked){
-            let vase = {}
-            vase.name = o.value;
-            vase.price = o.dataset.price;
-            order.vases = vase;
-            vaseName=o.value;
-        }
-    })
+    order.vases = vases.value;
+    productTotalCost += parseInt(vases.dataset.price);
+    order.totalCost = productTotalCost;
     order.name = orderName.value;
     order.phone = orderPhoneNum.value;
     order.mail = orderMail.value;
@@ -129,7 +130,7 @@ function sendProductOrder(){
     if(order.flowers.length==0){
         alert('請選擇想使用的花卉');
         location.href = 'product.html#';
-    } else if(vaseName==''){
+    } else if(order.vases==''){
         alert('請選擇想使用的容器或裝飾');
         location.href = 'product.html#';
     } else if(orderName.value==''||orderPhoneNum.value==''||orderMail.value==''||orderAddress.value==''){
