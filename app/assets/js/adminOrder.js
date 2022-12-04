@@ -67,6 +67,10 @@ function searchOrder() {
 function filterName(users) {
     const orderName = document.getElementById('orderName').value;
     let user = users.filter(o => o.name == orderName)[0]
+    users.forEach(u=>{
+        console.log(u.name)
+    })
+    console.log(orderName)
     if (orderName == '') {
         return '';
     } else {

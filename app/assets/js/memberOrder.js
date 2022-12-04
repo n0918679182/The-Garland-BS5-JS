@@ -50,6 +50,7 @@ function renderOrder(orders, products){
                     </div>
                 </div>
                 <div class="accordion-body">
+                    <p>收件人：${o.name}</p>
                     <p>訂單狀態：${o.state==1?'待出貨':(o.state==2?'已出貨':(o.state==3?'送達門市':'已取貨'))}</p>
                     <p>付款方式：貨到付款</p>
                     <p>收件地址：${o.address}</p>

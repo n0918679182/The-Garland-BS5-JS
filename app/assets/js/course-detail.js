@@ -56,15 +56,16 @@ function courseDetailInit() {
 
     // 送出課程訂單
     courseTableBtn.addEventListener('click', function () {
-        // 先判定是否有欄位未填
-        if (courseId.value == '' || studName.value == '' || studPhoneNum.value == '' || studMail.value == '') {
-            alert('表單輸入不完全');
+        // 判斷是否有登入
+        if (member == null) {
+            alert('請先登入喔!');
+            location.href = 'login.html';
         } else {
-            // 判斷是否有登入
-            if (member == null) {
-                alert('請先登入喔!');
-                location.href = 'login.html';
+            // 先判定是否有欄位未填
+            if (courseId.value == '' || studName.value == '' || studPhoneNum.value == '' || studMail.value == '') {
+                alert('表單輸入不完全');
             } else {
+
                 let obj = {};
                 obj.id = null;
                 obj.userId = member.id;
@@ -100,11 +101,11 @@ function courseDetailInit() {
 
         }
 
+
     })
+}
 
-
-
-
-
-
+function courseSignupTable(){
+    const courseTableTab = document.getElementById('courseTable-tab');
+    courseTableTab.click();
 }
