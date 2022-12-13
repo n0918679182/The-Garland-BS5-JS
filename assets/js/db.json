@@ -21,16 +21,6 @@
       "permission": "commenUser"
     },
     {
-      "id": 3,
-      "name": "Mark",
-      "account": "bbbb123",
-      "password": "bbbb456",
-      "mail": "bbbb123@gmail.com",
-      "phone": "0912345678",
-      "address": "台中市東區東光路64號",
-      "permission": "commenUser"
-    },
-    {
       "id": 4,
       "name": "Peter",
       "account": "c123",
@@ -168,11 +158,6 @@
       "id": 2,
       "userId": 2,
       "courseId": 2
-    },
-    {
-      "id": 4,
-      "userId": 3,
-      "courseId": 1
     },
     {
       "id": 5,
