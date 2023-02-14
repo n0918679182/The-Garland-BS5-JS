@@ -1,4 +1,5 @@
 # The Garland
+可以將 app/assets/js/db.json 下載下來，然後使用 Json-server 來配合 [The Garland](https://n0918679182.github.io/The-Garland-BS5-JS/)一起使用
 
 ## 創作理念
 會選這個題目其實是因為我自己本身蠻喜歡在 youtube 或抖音上看一些花圈花束的製作過程，但一直沒有更深入地去了解花藝這件事，那剛好要發想題目，於是查了一些相關的資料，覺得還蠻不錯的，就想要來做一個有關花藝的網站。
