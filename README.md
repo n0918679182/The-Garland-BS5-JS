@@ -7,10 +7,10 @@
 那我這次的專題使用到的技術，首先在規劃及畫線稿時使用到了 GitMind 以及 Figma，程式編輯使用了 vscode，使用 git 做版本控制，然後這個專題主要是使用 Bootstrap 5 做 CSS 的框架，然後使用原生 JS 撰寫，DB 的部分使用 Json-server 來模擬資料庫並用 Axios 做串接，也有用到了一些 swiper 套件
 
 ## 開發流程 
-[網站地圖](https://gitmind.com/app/docs/mza70sgs)
-[線搞圖](https://www.figma.com/file/lNBSE3lzdtzD4fbxP2vuK9/The-Garland?node-id=0%3A1)
-[六角設計師首頁](https://www.figma.com/file/qa0Fc7EmbSzIl57jD2moMB/Project-%2F-The-Garland?node-id=14%3A875)
-[剩餘頁面的設計稿](https://www.figma.com/file/lNBSE3lzdtzD4fbxP2vuK9/The-Garland?node-id=316%3A2&t=p3nUCyFJYpw1bv3Z-1)
+- [網站地圖](https://gitmind.com/app/docs/mza70sgs)
+- [線搞圖](https://www.figma.com/file/lNBSE3lzdtzD4fbxP2vuK9/The-Garland?node-id=0%3A1)
+- [六角設計師首頁](https://www.figma.com/file/qa0Fc7EmbSzIl57jD2moMB/Project-%2F-The-Garland?node-id=14%3A875)
+- [剩餘頁面的設計稿](https://www.figma.com/file/lNBSE3lzdtzD4fbxP2vuK9/The-Garland?node-id=316%3A2&t=p3nUCyFJYpw1bv3Z-1)
 
 ## 圖片來源
 
